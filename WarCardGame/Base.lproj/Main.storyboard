@@ -1,24 +1,391 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iUG-HI-DoQ">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Blackjack View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BlackjackViewController" title="Blackjack" id="BYZ-38-t0r" userLabel="Blackjack View Controller" customClass="BlackjackViewController" customModule="WarCardGame" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="8si-yX-6We" userLabel="Cards Stack View">
+                                <rect key="frame" x="52.5" y="117" width="270" height="170"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card10" translatesAutoresizingMaskIntoConstraints="NO" id="wu4-nz-1ts">
+                                        <rect key="frame" x="0.0" y="0.0" width="120" height="170"/>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card14" translatesAutoresizingMaskIntoConstraints="NO" id="uTy-So-cY2">
+                                        <rect key="frame" x="150" y="0.0" width="120" height="170"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="130" id="HyO-6M-E42"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="HyO-6M-E42"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=compact-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="HyO-6M-E42"/>
+                                    </mask>
+                                </variation>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="pEM-nr-pY6" userLabel="Punten Player">
+                                <rect key="frame" x="20" y="465.5" width="47" height="68.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ihT-S8-iQT">
+                                        <rect key="frame" x="0.0" y="0.0" width="47" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r0B-Z8-s3T">
+                                        <rect key="frame" x="0.0" y="20.5" width="25" height="48"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="Fzb-r6-6hi" userLabel="Punten CPU">
+                                <rect key="frame" x="320.5" y="465.5" width="34.5" height="68.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CPU" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rvf-XA-60l" userLabel="CPU">
+                                        <rect key="frame" x="0.0" y="0.0" width="34.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GTW-ij-AYa">
+                                        <rect key="frame" x="9.5" y="20.5" width="25" height="48"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pf7-Xq-O6R" customClass="NieuweButton" customModule="WarCardGame" customModuleProvider="target">
+                                <rect key="frame" x="169" y="317" width="37" height="34"/>
+                                <state key="normal" title="Deal"/>
+                                <connections>
+                                    <action selector="dealTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nvC-hF-ujm"/>
+                                    <action selector="topButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5rE-1i-sAH"/>
+                                    <action selector="touchDragExit:" destination="BYZ-38-t0r" eventType="touchDragExit" id="jd3-tQ-c85"/>
+                                </connections>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="GCi-ef-TyI">
+                                <rect key="frame" x="126.5" y="30" width="122" height="67"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.058391353629999997" green="0.054083341290000003" blue="0.05434820605" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Fzb-r6-6hi" secondAttribute="trailing" constant="20" id="02B-i7-eOc"/>
+                            <constraint firstItem="pf7-Xq-O6R" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0fr-xn-eoY"/>
+                            <constraint firstItem="8si-yX-6We" firstAttribute="top" secondItem="GCi-ef-TyI" secondAttribute="bottom" constant="20" id="Dpe-HK-cC1"/>
+                            <constraint firstItem="GCi-ef-TyI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="EZL-qw-tA7"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Fzb-r6-6hi" secondAttribute="bottom" constant="20" id="HIJ-OR-2MD"/>
+                            <constraint firstItem="pf7-Xq-O6R" firstAttribute="top" secondItem="8si-yX-6We" secondAttribute="bottom" constant="30" id="Hat-lE-B2j"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="pEM-nr-pY6" secondAttribute="bottom" constant="20" id="SJA-Xx-nYz"/>
+                            <constraint firstItem="GCi-ef-TyI" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="WtI-xm-6OR"/>
+                            <constraint firstItem="8si-yX-6We" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cHx-1g-WU2"/>
+                            <constraint firstItem="pEM-nr-pY6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="e1a-BB-llV"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Blackjack" largeTitleDisplayMode="never" id="N0a-Mb-NlG"/>
+                    <connections>
+                        <outlet property="leftImageView" destination="wu4-nz-1ts" id="7YC-nj-Zhh"/>
+                        <outlet property="leftScoreLabel" destination="r0B-Z8-s3T" id="aQK-Sh-Jsx"/>
+                        <outlet property="rightImageView" destination="uTy-So-cY2" id="sjV-yO-RDf"/>
+                        <outlet property="rightScoreLabel" destination="GTW-ij-AYa" id="W8k-MS-DRx"/>
+                        <outlet property="topCustomButton" destination="pf7-Xq-O6R" id="qWb-4k-xyr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="5348" y="700.29985007496259"/>
+        </scene>
+        <!--Poker-->
+        <scene sceneID="3eJ-mW-Cff">
+            <objects>
+                <viewController title="Poker" id="x2E-E2-RqM" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VWm-62-hh9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="jug-iC-hoM"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Poker" largeTitleDisplayMode="never" id="lrb-Sk-mFe"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2LY-AF-aRH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4548" y="1449.6251874062971"/>
+        </scene>
+        <!--Shop-->
+        <scene sceneID="1ii-zU-Vk2">
+            <objects>
+                <viewController title="Shop" id="77d-TC-fQz" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Qv4-dB-PEQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="WFn-Jj-Ovi"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Shop" largeTitleDisplayMode="always" id="4hK-jJ-DXJ">
+                        <barButtonItem key="backBarButtonItem" title="Shop" id="O73-Eh-Mng"/>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MlD-cg-O8Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3608.8000000000002" y="1449.6251874062971"/>
+        </scene>
+        <!--Casino-->
+        <scene sceneID="0zO-nu-AcC">
+            <objects>
+                <tableViewController title="Casino" id="ev8-AY-yig" customClass="HomeTableViewController" customModule="WarCardGame" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="9YF-yK-HCi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="502"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="separatorColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <sections>
+                            <tableViewSection id="ekb-U9-ZTX">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Blackjack" rowHeight="200" id="Jvp-M8-hRt">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Jvp-M8-hRt" id="xAM-Vt-sbV">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DDO-4N-1PP">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
+                                                    <fontDescription key="fontDescription" name="HoeflerText-Black" family="Hoefler Text" pointSize="35"/>
+                                                    <state key="normal" title="Blackjack" backgroundImage="banner1">
+                                                        <color key="titleColor" red="0.87080770730000001" green="0.7089357972" blue="0.42352041600000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <segue destination="BYZ-38-t0r" kind="show" id="q9K-Od-iFf"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="DDO-4N-1PP" firstAttribute="top" secondItem="xAM-Vt-sbV" secondAttribute="top" id="QIO-9z-897"/>
+                                                <constraint firstAttribute="bottom" secondItem="DDO-4N-1PP" secondAttribute="bottom" id="SQ1-f9-ENz"/>
+                                                <constraint firstAttribute="trailing" secondItem="DDO-4N-1PP" secondAttribute="trailing" id="ue5-yP-a4l"/>
+                                                <constraint firstItem="DDO-4N-1PP" firstAttribute="leading" secondItem="xAM-Vt-sbV" secondAttribute="leading" id="vZp-BI-jBb"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="200" id="Lgb-c5-nvi" userLabel="Poker">
+                                        <rect key="frame" x="0.0" y="200" width="375" height="200"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Lgb-c5-nvi" id="zLf-Dj-lm8">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ckq-rb-tYO">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
+                                                    <state key="normal" title="Poker" image="banner2">
+                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <connections>
+                                                        <segue destination="x2E-E2-RqM" kind="show" id="ULy-VI-ZWy"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Ckq-rb-tYO" firstAttribute="leading" secondItem="zLf-Dj-lm8" secondAttribute="leading" id="10p-qC-X9I"/>
+                                                <constraint firstAttribute="bottom" secondItem="Ckq-rb-tYO" secondAttribute="bottom" id="AYC-dY-WTm"/>
+                                                <constraint firstItem="Ckq-rb-tYO" firstAttribute="top" secondItem="zLf-Dj-lm8" secondAttribute="top" id="WUJ-JZ-vMx"/>
+                                                <constraint firstAttribute="trailing" secondItem="Ckq-rb-tYO" secondAttribute="trailing" id="qVp-KZ-58M"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="200" id="jgs-ZP-2fk" userLabel="Poker">
+                                        <rect key="frame" x="0.0" y="400" width="375" height="200"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jgs-ZP-2fk" id="675-Yy-PBV">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HRe-5Y-I8V">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
+                                                    <state key="normal" title="Poker" image="banner5">
+                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="HRe-5Y-I8V" secondAttribute="bottom" id="4yH-po-6i7"/>
+                                                <constraint firstAttribute="trailing" secondItem="HRe-5Y-I8V" secondAttribute="trailing" id="Ddh-Lz-neU"/>
+                                                <constraint firstItem="HRe-5Y-I8V" firstAttribute="leading" secondItem="675-Yy-PBV" secondAttribute="leading" id="Wkb-EE-gmK"/>
+                                                <constraint firstItem="HRe-5Y-I8V" firstAttribute="top" secondItem="675-Yy-PBV" secondAttribute="top" id="iSs-TI-FHp"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="200" id="wwT-Lz-JnM" userLabel="Poker">
+                                        <rect key="frame" x="0.0" y="600" width="375" height="200"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wwT-Lz-JnM" id="Ukr-Db-PvH">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dg4-IJ-mae">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
+                                                    <state key="normal" title="Poker" image="banner2">
+                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="dg4-IJ-mae" secondAttribute="trailing" id="YZT-h1-SkR"/>
+                                                <constraint firstItem="dg4-IJ-mae" firstAttribute="top" secondItem="Ukr-Db-PvH" secondAttribute="top" id="ZRm-fV-T8m"/>
+                                                <constraint firstAttribute="bottom" secondItem="dg4-IJ-mae" secondAttribute="bottom" id="ja1-77-azo"/>
+                                                <constraint firstItem="dg4-IJ-mae" firstAttribute="leading" secondItem="Ukr-Db-PvH" secondAttribute="leading" id="yTG-HP-zXg"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="ev8-AY-yig" id="sdf-aR-Ueu"/>
+                            <outlet property="delegate" destination="ev8-AY-yig" id="Oh9-O4-CJb"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Casino" largeTitleDisplayMode="always" id="n6C-TX-Vsk">
+                        <barButtonItem key="backBarButtonItem" title="Casino" id="cre-7A-j1H"/>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TIB-Xr-bD5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4548" y="699.40029985007504"/>
+        </scene>
+        <!--Account-->
+        <scene sceneID="a49-iL-8Tb">
+            <objects>
+                <viewController title="Account" id="U79-j0-6wW" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Nul-B0-GUE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="502"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="GOd-h8-7LF"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Account" largeTitleDisplayMode="always" id="eUS-qq-fEt">
+                        <barButtonItem key="backBarButtonItem" title="Account" id="jAJ-uQ-y6O"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xs6-N9-XBG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1334" y="1450"/>
+        </scene>
+        <!--TabBarController-->
+        <scene sceneID="pe2-Ws-obe">
+            <objects>
+                <tabBarController title="TabBarController" automaticallyAdjustsScrollViewInsets="NO" id="iUG-HI-DoQ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" barStyle="black" translucent="NO"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" id="nE8-mA-PQm">
+                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" red="0.89803921568627454" green="0.73333333333333328" blue="0.035294117647058823" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="jEU-Ye-7kL" kind="relationship" relationship="viewControllers" id="BfO-wa-xDB"/>
+                        <segue destination="5S7-xM-ROp" kind="relationship" relationship="viewControllers" id="l6p-Qp-Yaa"/>
+                        <segue destination="cYH-70-sQa" kind="relationship" relationship="viewControllers" id="WcZ-Ke-J7G"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aCg-9M-TLR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2847.1999999999998" y="699.40029985007504"/>
+        </scene>
+        <!--Casino-->
+        <scene sceneID="ZhJ-e6-C1e">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jEU-Ye-7kL" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Casino" image="home" id="gl1-8I-xV8"/>
+                    <toolbarItems/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" largeTitles="YES" id="U4b-6w-3NX">
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ev8-AY-yig" kind="relationship" relationship="rootViewController" id="iDH-db-Vf2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cgN-2R-t6K" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3608.8000000000002" y="699.40029985007504"/>
+        </scene>
+        <!--Shop-->
+        <scene sceneID="YMG-Xl-C1J">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5S7-xM-ROp" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Shop" image="menu" id="aFQ-yB-lSL"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" largeTitles="YES" id="ck5-Ie-j1S">
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="77d-TC-fQz" kind="relationship" relationship="rootViewController" id="dEr-Ih-nxy"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4yb-ri-ICK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2847.1999999999998" y="1449.6251874062971"/>
+        </scene>
+        <!--Account-->
+        <scene sceneID="L7b-bG-6Ba">
+            <objects>
+                <navigationController title="Account" automaticallyAdjustsScrollViewInsets="NO" id="cYH-70-sQa" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="krS-7C-3O9"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" largeTitles="YES" id="ule-oK-sxf">
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="U79-j0-6wW" kind="relationship" relationship="rootViewController" id="dsX-wh-psm"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YUC-2y-i5a" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2105" y="1450"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="banner1" width="626" height="253"/>
+        <image name="banner2" width="626" height="417"/>
+        <image name="banner5" width="1000" height="1000"/>
+        <image name="card10" width="120" height="170"/>
+        <image name="card14" width="120" height="170"/>
+        <image name="home" width="24" height="24"/>
+        <image name="logo" width="122" height="67"/>
+        <image name="menu" width="24" height="24"/>
+    </resources>
+    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
 </document>
