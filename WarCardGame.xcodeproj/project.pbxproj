@@ -37,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E40F1680237ABB3600229C78 /* Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
 		E4168ADC235EF6620020EFEB /* NieuweButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NieuweButton.swift; sourceTree = "<group>"; };
 		E4168ADE235F097E0020EFEB /* BlackjackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackjackViewController.swift; sourceTree = "<group>"; };
 		E436C85F237173CD00539050 /* HomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
@@ -80,6 +81,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E40F167F237ABB2300229C78 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E40F1680237ABB3600229C78 /* Deck.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		E494363A234C74D900B3B71C = {
 			isa = PBXGroup;
 			children = (
@@ -103,6 +112,7 @@
 		E4943645234C74D900B3B71C /* WarCardGame */ = {
 			isa = PBXGroup;
 			children = (
+				E40F167F237ABB2300229C78 /* Models */,
 				E4C330F4236F22D5004CD201 /* AppDelegate.swift */,
 				E494364A234C74D900B3B71C /* Main.storyboard */,
 				E43771CF235F66080076A591 /* PokerViewController.swift */,

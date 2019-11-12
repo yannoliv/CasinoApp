@@ -26,13 +26,14 @@ class BlackjackViewController: UIViewController {
     var scorePlayer : Int = 0
     var scoreDealer : Int = 0
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        self.initialiseerDeck()
         leftScoreLabel.text = String(scorePlayer)
         rightScoreLabel.text = String(scoreDealer)
-                
+        
     }
     
     @IBAction func dealTapped(_ sender: Any) {
@@ -67,5 +68,42 @@ class BlackjackViewController: UIViewController {
         topCustomButton.shake()
     }
     
+    func initialiseerDeck(){
+        let deckURL = URL(string: "https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1")!
+        
+        let task = URLSession.shared.dataTask(with: deckURL){(data, response, error) in
+            
+            let jsondecoder = JSONDecoder()
+            
+            if let data = data,
+                let deck = try? jsondecoder.decode(Deck.self, from:data){
+                print(deck)
+            }
+        }
+        
+        task.resume()
+    }
     
 }
+
+
+struct Deck: Codable{
+    var success:Bool = false
+    var deckID: String = ""
+    var shuffled: Bool = false
+    var remaining: Int = 0
+    
+    enum CodingKeys: String, CodingKey{
+        case success, deckID="deck_id", shuffled, remaining
+    }
+    
+    init(from decoder: Decoder) throws{
+        let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
+        self.success = try valueContainer.decode(Bool.self, forKey: CodingKeys.success)
+        self.deckID = try valueContainer.decode(String.self, forKey: CodingKeys.deckID)
+        self.shuffled = try valueContainer.decode(Bool.self, forKey: CodingKeys.shuffled)
+        self.remaining = try valueContainer.decode(Int.self, forKey: CodingKeys.remaining)
+    }
+}
+
+
