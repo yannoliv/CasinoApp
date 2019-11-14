@@ -18,99 +18,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="8si-yX-6We" userLabel="Cards Stack View">
-                                <rect key="frame" x="52.5" y="117" width="270" height="170"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card10" translatesAutoresizingMaskIntoConstraints="NO" id="wu4-nz-1ts">
-                                        <rect key="frame" x="0.0" y="0.0" width="120" height="170"/>
-                                    </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card14" translatesAutoresizingMaskIntoConstraints="NO" id="uTy-So-cY2">
-                                        <rect key="frame" x="150" y="0.0" width="120" height="170"/>
-                                    </imageView>
-                                </subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kaarten/8D" translatesAutoresizingMaskIntoConstraints="NO" id="b8M-Tt-8Je">
+                                <rect key="frame" x="67.5" y="-251" width="240.00000000000011" height="1056"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="130" id="HyO-6M-E42"/>
+                                    <constraint firstAttribute="width" constant="240" id="4hc-gc-GSl"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="HyO-6M-E42"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=compact-widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="HyO-6M-E42"/>
-                                    </mask>
-                                </variation>
-                            </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="pEM-nr-pY6" userLabel="Punten Player">
-                                <rect key="frame" x="20" y="465.5" width="47" height="68.5"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ihT-S8-iQT">
-                                        <rect key="frame" x="0.0" y="0.0" width="47" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r0B-Z8-s3T">
-                                        <rect key="frame" x="0.0" y="20.5" width="25" height="48"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="Fzb-r6-6hi" userLabel="Punten CPU">
-                                <rect key="frame" x="320.5" y="465.5" width="34.5" height="68.5"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CPU" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rvf-XA-60l" userLabel="CPU">
-                                        <rect key="frame" x="0.0" y="0.0" width="34.5" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GTW-ij-AYa">
-                                        <rect key="frame" x="9.5" y="20.5" width="25" height="48"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pf7-Xq-O6R" customClass="NieuweButton" customModule="WarCardGame" customModuleProvider="target">
-                                <rect key="frame" x="169" y="317" width="37" height="34"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qNJ-bc-pPz" customClass="NieuweButton" customModule="WarCardGame" customModuleProvider="target">
+                                <rect key="frame" x="172" y="504" width="31" height="30"/>
                                 <state key="normal" title="Deal"/>
                                 <connections>
-                                    <action selector="dealTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nvC-hF-ujm"/>
-                                    <action selector="topButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5rE-1i-sAH"/>
-                                    <action selector="touchDragExit:" destination="BYZ-38-t0r" eventType="touchDragExit" id="jd3-tQ-c85"/>
+                                    <action selector="dealTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JxV-la-gey"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="GCi-ef-TyI">
-                                <rect key="frame" x="126.5" y="30" width="122" height="67"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.058391353629999997" green="0.054083341290000003" blue="0.05434820605" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Fzb-r6-6hi" secondAttribute="trailing" constant="20" id="02B-i7-eOc"/>
-                            <constraint firstItem="pf7-Xq-O6R" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0fr-xn-eoY"/>
-                            <constraint firstItem="8si-yX-6We" firstAttribute="top" secondItem="GCi-ef-TyI" secondAttribute="bottom" constant="20" id="Dpe-HK-cC1"/>
-                            <constraint firstItem="GCi-ef-TyI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="EZL-qw-tA7"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Fzb-r6-6hi" secondAttribute="bottom" constant="20" id="HIJ-OR-2MD"/>
-                            <constraint firstItem="pf7-Xq-O6R" firstAttribute="top" secondItem="8si-yX-6We" secondAttribute="bottom" constant="30" id="Hat-lE-B2j"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="pEM-nr-pY6" secondAttribute="bottom" constant="20" id="SJA-Xx-nYz"/>
-                            <constraint firstItem="GCi-ef-TyI" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="WtI-xm-6OR"/>
-                            <constraint firstItem="8si-yX-6We" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cHx-1g-WU2"/>
-                            <constraint firstItem="pEM-nr-pY6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="e1a-BB-llV"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qNJ-bc-pPz" secondAttribute="bottom" constant="20" id="1ce-aA-HDc"/>
+                            <constraint firstItem="b8M-Tt-8Je" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Ojb-hu-nKn"/>
+                            <constraint firstItem="qNJ-bc-pPz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="TYu-sX-ncB"/>
+                            <constraint firstItem="b8M-Tt-8Je" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="zZ6-ls-Ml0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Blackjack" largeTitleDisplayMode="never" id="N0a-Mb-NlG"/>
                     <connections>
-                        <outlet property="leftImageView" destination="wu4-nz-1ts" id="7YC-nj-Zhh"/>
-                        <outlet property="leftScoreLabel" destination="r0B-Z8-s3T" id="aQK-Sh-Jsx"/>
-                        <outlet property="rightImageView" destination="uTy-So-cY2" id="sjV-yO-RDf"/>
-                        <outlet property="rightScoreLabel" destination="GTW-ij-AYa" id="W8k-MS-DRx"/>
-                        <outlet property="topCustomButton" destination="pf7-Xq-O6R" id="qWb-4k-xyr"/>
+                        <outlet property="leftImageView" destination="b8M-Tt-8Je" id="fZl-vb-1lf"/>
+                        <outlet property="topCustomButton" destination="qNJ-bc-pPz" id="jMg-7g-xfQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -173,7 +107,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DDO-4N-1PP">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="199.50000000000006"/>
                                                     <fontDescription key="fontDescription" name="HoeflerText-Black" family="Hoefler Text" pointSize="35"/>
                                                     <state key="normal" title="Blackjack" backgroundImage="banner1">
                                                         <color key="titleColor" red="0.87080770730000001" green="0.7089357972" blue="0.42352041600000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -381,10 +315,8 @@
         <image name="banner1" width="626" height="253"/>
         <image name="banner2" width="626" height="417"/>
         <image name="banner5" width="1000" height="1000"/>
-        <image name="card10" width="120" height="170"/>
-        <image name="card14" width="120" height="170"/>
         <image name="home" width="24" height="24"/>
-        <image name="logo" width="122" height="67"/>
+        <image name="kaarten/8D" width="691" height="1056"/>
         <image name="menu" width="24" height="24"/>
     </resources>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -15,60 +15,40 @@ class BlackjackViewController: UIViewController {
     
     @IBOutlet weak var leftImageView: UIImageView!
     
-    @IBOutlet weak var rightImageView: UIImageView!
+    var deckID: String=""
     
     
-    @IBOutlet weak var leftScoreLabel: UILabel!
-    
-    
-    @IBOutlet weak var rightScoreLabel: UILabel!
-    
-    var scorePlayer : Int = 0
-    var scoreDealer : Int = 0
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
-        self.initialiseerDeck()
-        leftScoreLabel.text = String(scorePlayer)
-        rightScoreLabel.text = String(scoreDealer)
-        
-    }
-    
-    @IBAction func dealTapped(_ sender: Any) {
-        
-        let leftSide: Int = Int.random(in: 2..<14)
-        let rightSide: Int = Int.random(in: 2..<14)
-        
-        leftImageView.image = UIImage(named: "card\(leftSide)")
-        
-        rightImageView.image = UIImage(named: "card\(rightSide)")
-        
-        if(leftSide > rightSide){
-            scorePlayer+=1
-            leftScoreLabel.text = String(scorePlayer)
-            
-        } else if(leftSide < rightSide){
-            scoreDealer+=1
-            rightScoreLabel.text = String(scoreDealer)
-            
-        }else{
-            // POPUP
-            let alertController = UIAlertController(title: "Tie screen", message:
-                "There is a tie!", preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
-            
-            self.present(alertController, animated: true, completion: nil)
+        self.fetchDeck{
+            (deck) in
+            guard let deck = deck else {return}
+            print(deck)
+            self.deckID = deck.deckID
         }
+        
     }
     
-    
-    @IBAction func topButtonTapped(_ sender: NieuweButton) {
+    @IBAction func dealTapped(_ sender: NieuweButton) {
         topCustomButton.shake()
+        
+        self.trekKaart{
+            (drawCard) in
+            guard let drawCard = drawCard else {return}
+            print(drawCard)
+            
+            DispatchQueue.main.async {
+                self.leftImageView.image = UIImage(named:"kaarten/\(drawCard.cards[0].code)")
+            }
+        }
+        
     }
     
-    func initialiseerDeck(){
+    
+    // Deck ophalen. Hiervan hebben we de ID nodig: deckID
+    func fetchDeck(completion: @escaping(Deck?) -> Void){
         let deckURL = URL(string: "https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1")!
         
         let task = URLSession.shared.dataTask(with: deckURL){(data, response, error) in
@@ -77,13 +57,35 @@ class BlackjackViewController: UIViewController {
             
             if let data = data,
                 let deck = try? jsondecoder.decode(Deck.self, from:data){
-                print(deck)
+                completion(deck)
+            } else {
+                print("Either no data was returned, or data was not properly decoded.")
+                completion(nil)
             }
         }
         
         task.resume()
     }
     
+    // 1 kaart trekken. https: //deckofcardsapi.com/api/deck/<<deck_id>>/draw/?count=2
+    func trekKaart(completion: @escaping(DrawCard?) -> Void){
+            
+        let trekKaartURL = URL(string : "https://deckofcardsapi.com/api/deck/\(self.deckID)/draw/?count=1")
+        
+        let task = URLSession.shared.dataTask(with: trekKaartURL!){(data, response, error) in
+            
+            let jsondecoder = JSONDecoder()
+            
+            if let data = data,
+                let drawCard = try? jsondecoder.decode(DrawCard.self, from:data){
+                completion(drawCard)
+            } else {
+                print("Either no data was returned, or data was not properly decoded.")
+                completion(nil)
+            }
+        }
+        task.resume()
+    }
 }
 
 
@@ -103,6 +105,44 @@ struct Deck: Codable{
         self.deckID = try valueContainer.decode(String.self, forKey: CodingKeys.deckID)
         self.shuffled = try valueContainer.decode(Bool.self, forKey: CodingKeys.shuffled)
         self.remaining = try valueContainer.decode(Int.self, forKey: CodingKeys.remaining)
+    }
+}
+
+struct DrawCard: Codable{
+    var success:Bool = false
+    var cards: [Card] = []
+    var deckID: String = ""
+    var remaining: Int = 0
+    
+    enum CodingKeys: String, CodingKey{
+        case success, cards, deckID="deck_id", remaining
+    }
+    
+    init(from decoder: Decoder) throws{
+        let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
+        self.success = try valueContainer.decode(Bool.self, forKey: CodingKeys.success)
+        self.cards = try valueContainer.decode([Card].self, forKey: CodingKeys.cards)
+        self.deckID = try valueContainer.decode(String.self, forKey: CodingKeys.deckID)
+        self.remaining = try valueContainer.decode(Int.self, forKey: CodingKeys.remaining)
+    }
+}
+
+struct Card:Codable{
+    var image = URL(string:"")
+    var value: String = ""
+    var suit: String = ""
+    var code: String = ""
+    
+    enum CodingKeys: String, CodingKey{
+        case image, value, suit, code
+    }
+    
+    init(from decoder: Decoder) throws{
+        let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
+        self.image = try valueContainer.decode(URL.self, forKey: CodingKeys.image)
+        self.value = try valueContainer.decode(String.self, forKey: CodingKeys.value)
+        self.suit = try valueContainer.decode(String.self, forKey: CodingKeys.suit)
+        self.code = try valueContainer.decode(String.self, forKey: CodingKeys.code)
     }
 }
 
