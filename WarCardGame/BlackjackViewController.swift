@@ -46,10 +46,11 @@ class BlackjackViewController: UIViewController {
             
             DispatchQueue.main.async {
                 
-                /* button disablen na 1x klikken voor een second, spamprevention
+                // button disablen na 1x klikken voor een second, spamprevention
                 self.topCustomButton.isEnabled = false
-                Timer.scheduledTimer(timeInterval: 2, target: self, selector: Selector("enableButton"), userInfo: nil, repeats: false)
-                */
+                Timer.scheduledTimer(withTimeInterval: 1.5, repeats: true, block: { timer in
+                    self.topCustomButton.isEnabled = true
+                })
                 
                 let nieuweKaart = UIImage(named:"kaarten/\(drawCard.cards[0].code)")
                 let kaartView = UIImageView(image: nieuweKaart!)
@@ -57,22 +58,11 @@ class BlackjackViewController: UIViewController {
                 self.aantalKaarten+=1
                 self.stackView.addSubview(kaartView)
                 
-                UIView.animate(withDuration: 0.75, delay: 0, options: UIView.AnimationOptions.curveLinear, animations: {
-                    
+                UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveLinear, animations: {
                     self.stackView.center.x -= 20
-                
                 }, completion: nil)
-                
-                //self.view.addSubview(kaartView);
             }
         }
-        
-        
-    }
-    
-    // button enabelen
-    func enableButton(){
-        self.topCustomButton.isEnabled = true
     }
     
     
