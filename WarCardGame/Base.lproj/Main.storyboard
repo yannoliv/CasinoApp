@@ -18,12 +18,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kaarten/8D" translatesAutoresizingMaskIntoConstraints="NO" id="b8M-Tt-8Je">
-                                <rect key="frame" x="67.5" y="-251" width="240.00000000000011" height="1056"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Vz-Gj-uei">
+                                <rect key="frame" x="147.5" y="100.5" width="80" height="123"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kaarten/8D" translatesAutoresizingMaskIntoConstraints="NO" id="b8M-Tt-8Je">
+                                        <rect key="frame" x="0.0" y="0.0" width="80" height="123"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="4hc-gc-GSl"/>
+                                            <constraint firstAttribute="height" constant="123" id="L1q-rY-Yt5"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="240" id="4hc-gc-GSl"/>
+                                    <constraint firstItem="b8M-Tt-8Je" firstAttribute="top" secondItem="8Vz-Gj-uei" secondAttribute="top" id="YpV-dF-xCF"/>
                                 </constraints>
-                            </imageView>
+                            </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qNJ-bc-pPz" customClass="NieuweButton" customModule="WarCardGame" customModuleProvider="target">
                                 <rect key="frame" x="172" y="504" width="31" height="30"/>
                                 <state key="normal" title="Deal"/>
@@ -31,19 +40,42 @@
                                     <action selector="dealTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JxV-la-gey"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jouw kaarten" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pcK-sv-LiS">
+                                <rect key="frame" x="136" y="50" width="103" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CPU kaarten" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P7j-Kv-xRL">
+                                <rect key="frame" x="139.5" y="253.5" width="96.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qr7-U9-IFk">
+                                <rect key="frame" x="101" y="504" width="41" height="30"/>
+                                <state key="normal" title="Stand"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.058391353629999997" green="0.054083341290000003" blue="0.05434820605" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qNJ-bc-pPz" secondAttribute="bottom" constant="20" id="1ce-aA-HDc"/>
-                            <constraint firstItem="b8M-Tt-8Je" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Ojb-hu-nKn"/>
+                            <constraint firstItem="P7j-Kv-xRL" firstAttribute="top" secondItem="8Vz-Gj-uei" secondAttribute="bottom" constant="30" id="DWi-QQ-WxN"/>
+                            <constraint firstItem="qNJ-bc-pPz" firstAttribute="leading" secondItem="qr7-U9-IFk" secondAttribute="trailing" constant="30" id="EHd-dX-VyO"/>
+                            <constraint firstItem="8Vz-Gj-uei" firstAttribute="top" secondItem="pcK-sv-LiS" secondAttribute="bottom" constant="30" id="GNC-m8-lZx"/>
                             <constraint firstItem="qNJ-bc-pPz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="TYu-sX-ncB"/>
-                            <constraint firstItem="b8M-Tt-8Je" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="zZ6-ls-Ml0"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qr7-U9-IFk" secondAttribute="bottom" constant="20" id="al2-dk-2fj"/>
+                            <constraint firstItem="pcK-sv-LiS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bdD-qz-wnM"/>
+                            <constraint firstItem="8Vz-Gj-uei" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cuv-dh-Ghy"/>
+                            <constraint firstItem="P7j-Kv-xRL" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="lax-Ji-MAz"/>
+                            <constraint firstItem="pcK-sv-LiS" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="wob-Hm-mrR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Blackjack" largeTitleDisplayMode="never" id="N0a-Mb-NlG"/>
                     <connections>
                         <outlet property="leftImageView" destination="b8M-Tt-8Je" id="fZl-vb-1lf"/>
+                        <outlet property="stackView" destination="8Vz-Gj-uei" id="wJY-l3-KQ9"/>
                         <outlet property="topCustomButton" destination="qNJ-bc-pPz" id="jMg-7g-xfQ"/>
                     </connections>
                 </viewController>
@@ -107,7 +139,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DDO-4N-1PP">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="199.50000000000006"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
                                                     <fontDescription key="fontDescription" name="HoeflerText-Black" family="Hoefler Text" pointSize="35"/>
                                                     <state key="normal" title="Blackjack" backgroundImage="banner1">
                                                         <color key="titleColor" red="0.87080770730000001" green="0.7089357972" blue="0.42352041600000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

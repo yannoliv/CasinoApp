@@ -15,7 +15,12 @@ class BlackjackViewController: UIViewController {
     
     @IBOutlet weak var leftImageView: UIImageView!
     
+    @IBOutlet weak var stackView: UIStackView!
+    
     var deckID: String=""
+    var totaalPuntenSpeler: Int = 0
+    var totaalPuntenCPU: Int = 0
+    var aantalKaarten: Int = 1
     
     
         
@@ -40,10 +45,34 @@ class BlackjackViewController: UIViewController {
             print(drawCard)
             
             DispatchQueue.main.async {
-                self.leftImageView.image = UIImage(named:"kaarten/\(drawCard.cards[0].code)")
+                
+                /* button disablen na 1x klikken voor een second, spamprevention
+                self.topCustomButton.isEnabled = false
+                Timer.scheduledTimer(timeInterval: 2, target: self, selector: Selector("enableButton"), userInfo: nil, repeats: false)
+                */
+                
+                let nieuweKaart = UIImage(named:"kaarten/\(drawCard.cards[0].code)")
+                let kaartView = UIImageView(image: nieuweKaart!)
+                kaartView.frame = CGRect(x: self.aantalKaarten*40, y: 0, width: 80, height: 123)
+                self.aantalKaarten+=1
+                self.stackView.addSubview(kaartView)
+                
+                UIView.animate(withDuration: 0.75, delay: 0, options: UIView.AnimationOptions.curveLinear, animations: {
+                    
+                    self.stackView.center.x -= 20
+                
+                }, completion: nil)
+                
+                //self.view.addSubview(kaartView);
             }
         }
         
+        
+    }
+    
+    // button enabelen
+    func enableButton(){
+        self.topCustomButton.isEnabled = true
     }
     
     
@@ -86,6 +115,30 @@ class BlackjackViewController: UIViewController {
         }
         task.resume()
     }
+    
+    func puntenVanKaart(card: Card) -> Int{
+        let value: String = card.value
+        var punten: Int = 0
+        
+        switch value {
+        case "JACK", "QUEEN", "KING":
+            punten = 10
+        case "ACE":
+            punten = 11
+        default:
+            punten = Int(value)!
+        }
+        return punten
+    }
+    
+    func doubleUp() {}
+    
+    func split() {}
+    
+    func insurance() {}
+    
+    func surrender() {}
+    
 }
 
 
