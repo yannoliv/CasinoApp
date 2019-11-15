@@ -20,20 +20,34 @@ class BlackjackViewController: UIViewController {
     var deckID: String=""
     var totaalPuntenSpeler: Int = 0
     var totaalPuntenCPU: Int = 0
-    var aantalKaarten: Int = 1
+    var aantalKaartenSpeler: Int = 0
     
     
         
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Deck aanmaken
         self.fetchDeck{
             (deck) in
             guard let deck = deck else {return}
             print(deck)
             self.deckID = deck.deckID
+            
+            // 2 kaarten trekken speler
+            for _ in 1...2{
+                self.trekKaart{
+                    (drawCard) in
+                    guard let drawCard = drawCard else {return}
+                    print(drawCard)
+                    
+                    DispatchQueue.main.async {
+                        self.voegKaartToe(code: drawCard.cards[0].code)
+                    }
+                }
+            }
+            
         }
-        
     }
     
     @IBAction func dealTapped(_ sender: NieuweButton) {
@@ -45,24 +59,30 @@ class BlackjackViewController: UIViewController {
             print(drawCard)
             
             DispatchQueue.main.async {
-                
                 // button disablen na 1x klikken voor een second, spamprevention
                 self.topCustomButton.isEnabled = false
                 Timer.scheduledTimer(withTimeInterval: 1.5, repeats: true, block: { timer in
                     self.topCustomButton.isEnabled = true
                 })
                 
-                let nieuweKaart = UIImage(named:"kaarten/\(drawCard.cards[0].code)")
-                let kaartView = UIImageView(image: nieuweKaart!)
-                kaartView.frame = CGRect(x: self.aantalKaarten*40, y: 0, width: 80, height: 123)
-                self.aantalKaarten+=1
-                self.stackView.addSubview(kaartView)
-                
-                UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveLinear, animations: {
-                    self.stackView.center.x -= 20
-                }, completion: nil)
+                self.voegKaartToe(code: drawCard.cards[0].code)
             }
         }
+    }
+    
+    // Eén kaart toevoegen in de stackview
+    func voegKaartToe(code: String){
+        let nieuweKaart = UIImage(named:"kaarten/\(code)")
+        guard nieuweKaart != nil else {return}
+        
+        let kaartView = UIImageView(image: nieuweKaart!)
+        kaartView.frame = CGRect(x: -20 + self.aantalKaartenSpeler*40, y: 0, width: 80, height: 123)
+        self.aantalKaartenSpeler+=1
+        self.stackView.addSubview(kaartView)
+        
+        UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveLinear, animations: {
+            self.stackView.center.x -= 20
+        }, completion: nil)
     }
     
     
