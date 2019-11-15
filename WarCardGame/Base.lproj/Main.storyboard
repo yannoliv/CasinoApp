@@ -18,8 +18,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Vz-Gj-uei">
-                                <rect key="frame" x="147.5" y="100.5" width="80" height="123"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8Vz-Gj-uei">
+                                <rect key="frame" x="20" y="100.5" width="335" height="123"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="123" id="29r-EP-4dr"/>
+                                </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qNJ-bc-pPz" customClass="NieuweButton" customModule="WarCardGame" customModuleProvider="target">
                                 <rect key="frame" x="172" y="504" width="31" height="30"/>
@@ -66,7 +69,7 @@
                             <constraint firstItem="qNJ-bc-pPz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="TYu-sX-ncB"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qr7-U9-IFk" secondAttribute="bottom" constant="20" id="al2-dk-2fj"/>
                             <constraint firstItem="pcK-sv-LiS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bdD-qz-wnM"/>
-                            <constraint firstItem="8Vz-Gj-uei" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-20" id="cuv-dh-Ghy"/>
+                            <constraint firstItem="8Vz-Gj-uei" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-40" id="cuv-dh-Ghy"/>
                             <constraint firstItem="P7j-Kv-xRL" firstAttribute="top" secondItem="pcK-sv-LiS" secondAttribute="bottom" constant="180" id="fAF-Sb-tHr"/>
                             <constraint firstItem="rGg-z5-fdo" firstAttribute="top" secondItem="nor-7L-bvO" secondAttribute="bottom" constant="8" id="lGT-mH-aun"/>
                             <constraint firstItem="P7j-Kv-xRL" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="lax-Ji-MAz"/>
@@ -143,7 +146,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DDO-4N-1PP">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="199.50000000000006"/>
                                                     <fontDescription key="fontDescription" name="HoeflerText-Black" family="Hoefler Text" pointSize="35"/>
                                                     <state key="normal" title="Blackjack" backgroundImage="banner1">
                                                         <color key="titleColor" red="0.87080770730000001" green="0.7089357972" blue="0.42352041600000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

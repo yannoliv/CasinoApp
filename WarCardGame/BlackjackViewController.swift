@@ -13,13 +13,10 @@ class BlackjackViewController: UIViewController {
     @IBOutlet private var topCustomButton: NieuweButton!
     var bottomCustomButton = NieuweButton()
     
-    @IBOutlet weak var leftImageView: UIImageView!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var labelPuntenSpeler: UILabel!
     
     var deckID: String=""
-    var aantalKaartenSpeler: Int = 0
-    var totaalPuntenSpeler:Int = 0
     var kaartenSpeler: [Card] = []
     
     
@@ -41,7 +38,7 @@ class BlackjackViewController: UIViewController {
                     guard let drawCard = drawCard else {return}
                     DispatchQueue.main.async {
                         self.voegKaartToe(code: drawCard.cards[0].code)
-                        self.labelPuntenSpeler.text = self.puntenVanSpeler()
+                        //self.labelPuntenSpeler.text = self.puntenVanSpeler()
                     }
                 }
             }
@@ -54,7 +51,6 @@ class BlackjackViewController: UIViewController {
         self.fetchKaart{
             (drawCard) in
             guard let drawCard = drawCard else {return}
-            print(drawCard)
             
             DispatchQueue.main.async {
                 // button disablen na 1x klikken voor een second, spamprevention
@@ -74,13 +70,14 @@ class BlackjackViewController: UIViewController {
         guard nieuweKaart != nil else {return}
         
         let kaartView = UIImageView(image: nieuweKaart!)
-        kaartView.frame = CGRect(x: -20 + self.aantalKaartenSpeler*40, y: 0, width: 80, height: 123)
-        self.aantalKaartenSpeler+=1
+        kaartView.frame = CGRect(x: -20 + self.kaartenSpeler.count*40, y: 0, width: 80, height: 123)
         self.stackView.addSubview(kaartView)
         
         UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveLinear, animations: {
             self.stackView.center.x -= 20
         }, completion: nil)
+        
+        print(self.puntenVanSpeler())
     }
     
     
@@ -128,25 +125,23 @@ class BlackjackViewController: UIViewController {
     
     func puntenVanSpeler() -> String{
         var totaal: Int = 0
+        var heeftAce: Bool = false
         
         for index in self.kaartenSpeler{
-            
             let value: String = index.value
-            
             switch value {
             case "JACK", "QUEEN", "KING":
                 totaal += 10
             case "ACE":
-                if(self.totaalPuntenSpeler <= 21){
-                    totaal += 11
-                } else{
-                    totaal += 1
-                }
+                totaal += 1
+                heeftAce = true
             default:
                 totaal += Int(value)!
             }
         }
-        self.totaalPuntenSpeler = totaal
+        if(totaal <= 11 && heeftAce){
+            totaal += 10
+        }
         return "\(totaal)"
     }
     
