@@ -16,11 +16,11 @@ class BlackjackViewController: UIViewController {
     @IBOutlet weak var leftImageView: UIImageView!
     
     @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var labelPunten: UILabel!
     
     var deckID: String=""
     var totaalPuntenSpeler: Int = 0
-    var totaalPuntenCPU: Int = 0
-    var aantalKaartenSpeler: Int = 0
+    var kaartenSpeler: [Card] = []
     
     
         
@@ -36,13 +36,14 @@ class BlackjackViewController: UIViewController {
             
             // 2 kaarten trekken speler
             for _ in 1...2{
-                self.trekKaart{
+                self.fetchKaart{
                     (drawCard) in
                     guard let drawCard = drawCard else {return}
                     print(drawCard)
                     
                     DispatchQueue.main.async {
                         self.voegKaartToe(code: drawCard.cards[0].code)
+                        self.labelPunten.text = self.puntenVanSpeler()
                     }
                 }
             }
@@ -50,13 +51,13 @@ class BlackjackViewController: UIViewController {
         }
     }
     
+    // Knop Deal listener
     @IBAction func dealTapped(_ sender: NieuweButton) {
         topCustomButton.shake()
         
-        self.trekKaart{
+        self.fetchKaart{
             (drawCard) in
             guard let drawCard = drawCard else {return}
-            print(drawCard)
             
             DispatchQueue.main.async {
                 // button disablen na 1x klikken voor een second, spamprevention
@@ -64,7 +65,7 @@ class BlackjackViewController: UIViewController {
                 Timer.scheduledTimer(withTimeInterval: 1.5, repeats: true, block: { timer in
                     self.topCustomButton.isEnabled = true
                 })
-                
+                self.labelPunten.text = self.puntenVanSpeler()
                 self.voegKaartToe(code: drawCard.cards[0].code)
             }
         }
@@ -74,14 +75,12 @@ class BlackjackViewController: UIViewController {
     func voegKaartToe(code: String){
         let nieuweKaart = UIImage(named:"kaarten/\(code)")
         guard nieuweKaart != nil else {return}
-        
         let kaartView = UIImageView(image: nieuweKaart!)
-        kaartView.frame = CGRect(x: -20 + self.aantalKaartenSpeler*40, y: 0, width: 80, height: 123)
-        self.aantalKaartenSpeler+=1
+        kaartView.frame = CGRect(x: 0 + self.kaartenSpeler.count*40, y: 0, width: 80, height: 123)
         self.stackView.addSubview(kaartView)
-        
-        UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveLinear, animations: {
-            self.stackView.center.x -= 20
+
+        UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveEaseIn, animations: {
+            self.stackView.frame.origin.x -= 20
         }, completion: nil)
     }
     
@@ -107,7 +106,7 @@ class BlackjackViewController: UIViewController {
     }
     
     // 1 kaart trekken. https: //deckofcardsapi.com/api/deck/<<deck_id>>/draw/?count=2
-    func trekKaart(completion: @escaping(DrawCard?) -> Void){
+    func fetchKaart(completion: @escaping(DrawCard?) -> Void){
             
         let trekKaartURL = URL(string : "https://deckofcardsapi.com/api/deck/\(self.deckID)/draw/?count=1")
         
@@ -117,6 +116,8 @@ class BlackjackViewController: UIViewController {
             
             if let data = data,
                 let drawCard = try? jsondecoder.decode(DrawCard.self, from:data){
+                self.kaartenSpeler.insert(drawCard.cards[0], at: 0)
+                print(drawCard.cards[0])
                 completion(drawCard)
             } else {
                 print("Either no data was returned, or data was not properly decoded.")
@@ -126,19 +127,30 @@ class BlackjackViewController: UIViewController {
         task.resume()
     }
     
-    func puntenVanKaart(card: Card) -> Int{
-        let value: String = card.value
-        var punten: Int = 0
+    func puntenVanSpeler() -> String{
         
-        switch value {
-        case "JACK", "QUEEN", "KING":
-            punten = 10
-        case "ACE":
-            punten = 11
-        default:
-            punten = Int(value)!
+        var totaal: Int = 0
+        
+        for index in self.kaartenSpeler{
+            
+            let value: String = index.value
+            
+            switch value {
+            case "JACK", "QUEEN", "KING":
+                totaal += 10
+            case "ACE":
+                if(self.totaalPuntenSpeler <= 21){
+                    totaal += 11
+                } else{
+                    totaal += 1
+                }
+            default:
+                totaal += Int(value)!
+            }
         }
-        return punten
+        
+        self.totaalPuntenSpeler = totaal
+        return "\(totaal)"
     }
     
     func doubleUp() {}
