@@ -14,13 +14,13 @@ class BlackjackViewController: UIViewController {
     var bottomCustomButton = NieuweButton()
     
     @IBOutlet weak var leftImageView: UIImageView!
-    
     @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var labelPuntenSpeler: UILabel!
     
     var deckID: String=""
-    var totaalPuntenSpeler: Int = 0
-    var totaalPuntenCPU: Int = 0
     var aantalKaartenSpeler: Int = 0
+    var totaalPuntenSpeler:Int = 0
+    var kaartenSpeler: [Card] = []
     
     
         
@@ -36,24 +36,22 @@ class BlackjackViewController: UIViewController {
             
             // 2 kaarten trekken speler
             for _ in 1...2{
-                self.trekKaart{
+                self.fetchKaart{
                     (drawCard) in
                     guard let drawCard = drawCard else {return}
-                    print(drawCard)
-                    
                     DispatchQueue.main.async {
                         self.voegKaartToe(code: drawCard.cards[0].code)
+                        self.labelPuntenSpeler.text = self.puntenVanSpeler()
                     }
                 }
             }
-            
         }
     }
     
     @IBAction func dealTapped(_ sender: NieuweButton) {
         topCustomButton.shake()
         
-        self.trekKaart{
+        self.fetchKaart{
             (drawCard) in
             guard let drawCard = drawCard else {return}
             print(drawCard)
@@ -64,8 +62,8 @@ class BlackjackViewController: UIViewController {
                 Timer.scheduledTimer(withTimeInterval: 1.5, repeats: true, block: { timer in
                     self.topCustomButton.isEnabled = true
                 })
-                
                 self.voegKaartToe(code: drawCard.cards[0].code)
+                //self.labelPuntenSpeler.text = self.puntenVanSpeler()
             }
         }
     }
@@ -107,7 +105,7 @@ class BlackjackViewController: UIViewController {
     }
     
     // 1 kaart trekken. https: //deckofcardsapi.com/api/deck/<<deck_id>>/draw/?count=2
-    func trekKaart(completion: @escaping(DrawCard?) -> Void){
+    func fetchKaart(completion: @escaping(DrawCard?) -> Void){
             
         let trekKaartURL = URL(string : "https://deckofcardsapi.com/api/deck/\(self.deckID)/draw/?count=1")
         
@@ -117,6 +115,8 @@ class BlackjackViewController: UIViewController {
             
             if let data = data,
                 let drawCard = try? jsondecoder.decode(DrawCard.self, from:data){
+                self.kaartenSpeler.insert(drawCard.cards[0], at: 0)
+                print(drawCard.cards[0])
                 completion(drawCard)
             } else {
                 print("Either no data was returned, or data was not properly decoded.")
@@ -126,19 +126,28 @@ class BlackjackViewController: UIViewController {
         task.resume()
     }
     
-    func puntenVanKaart(card: Card) -> Int{
-        let value: String = card.value
-        var punten: Int = 0
+    func puntenVanSpeler() -> String{
+        var totaal: Int = 0
         
-        switch value {
-        case "JACK", "QUEEN", "KING":
-            punten = 10
-        case "ACE":
-            punten = 11
-        default:
-            punten = Int(value)!
+        for index in self.kaartenSpeler{
+            
+            let value: String = index.value
+            
+            switch value {
+            case "JACK", "QUEEN", "KING":
+                totaal += 10
+            case "ACE":
+                if(self.totaalPuntenSpeler <= 21){
+                    totaal += 11
+                } else{
+                    totaal += 1
+                }
+            default:
+                totaal += Int(value)!
+            }
         }
-        return punten
+        self.totaalPuntenSpeler = totaal
+        return "\(totaal)"
     }
     
     func doubleUp() {}
@@ -208,5 +217,3 @@ struct Card:Codable{
         self.code = try valueContainer.decode(String.self, forKey: CodingKeys.code)
     }
 }
-
-

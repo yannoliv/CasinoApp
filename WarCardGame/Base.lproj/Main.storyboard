@@ -44,24 +44,41 @@
                                 <rect key="frame" x="101" y="504" width="41" height="30"/>
                                 <state key="normal" title="Stand"/>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Punten:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nor-7L-bvO">
+                                <rect key="frame" x="16" y="16" width="59" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.8980392157" green="0.73333333329999995" blue="0.035294117649999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rGg-z5-fdo">
+                                <rect key="frame" x="36" y="45" width="19" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" red="0.8980392157" green="0.73333333329999995" blue="0.035294117649999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.058391353629999997" green="0.054083341290000003" blue="0.05434820605" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qNJ-bc-pPz" secondAttribute="bottom" constant="20" id="1ce-aA-HDc"/>
                             <constraint firstItem="qNJ-bc-pPz" firstAttribute="leading" secondItem="qr7-U9-IFk" secondAttribute="trailing" constant="30" id="EHd-dX-VyO"/>
                             <constraint firstItem="8Vz-Gj-uei" firstAttribute="top" secondItem="pcK-sv-LiS" secondAttribute="bottom" constant="30" id="GNC-m8-lZx"/>
+                            <constraint firstItem="nor-7L-bvO" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="J83-7t-AUM"/>
                             <constraint firstItem="qNJ-bc-pPz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="TYu-sX-ncB"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qr7-U9-IFk" secondAttribute="bottom" constant="20" id="al2-dk-2fj"/>
                             <constraint firstItem="pcK-sv-LiS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bdD-qz-wnM"/>
-                            <constraint firstItem="8Vz-Gj-uei" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cuv-dh-Ghy"/>
+                            <constraint firstItem="8Vz-Gj-uei" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-20" id="cuv-dh-Ghy"/>
                             <constraint firstItem="P7j-Kv-xRL" firstAttribute="top" secondItem="pcK-sv-LiS" secondAttribute="bottom" constant="180" id="fAF-Sb-tHr"/>
+                            <constraint firstItem="rGg-z5-fdo" firstAttribute="top" secondItem="nor-7L-bvO" secondAttribute="bottom" constant="8" id="lGT-mH-aun"/>
                             <constraint firstItem="P7j-Kv-xRL" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="lax-Ji-MAz"/>
+                            <constraint firstItem="nor-7L-bvO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="qOo-Tp-XQP"/>
+                            <constraint firstItem="rGg-z5-fdo" firstAttribute="centerX" secondItem="nor-7L-bvO" secondAttribute="centerX" id="t6d-JF-2Id"/>
                             <constraint firstItem="pcK-sv-LiS" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="wob-Hm-mrR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Blackjack" largeTitleDisplayMode="never" id="N0a-Mb-NlG"/>
                     <connections>
+                        <outlet property="labelPuntenSpeler" destination="rGg-z5-fdo" id="3Bg-ND-ULt"/>
                         <outlet property="stackView" destination="8Vz-Gj-uei" id="wJY-l3-KQ9"/>
                         <outlet property="topCustomButton" destination="qNJ-bc-pPz" id="jMg-7g-xfQ"/>
                     </connections>
