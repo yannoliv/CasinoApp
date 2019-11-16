@@ -47,41 +47,59 @@
                                 <rect key="frame" x="101" y="504" width="41" height="30"/>
                                 <state key="normal" title="Stand"/>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Punten:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nor-7L-bvO">
-                                <rect key="frame" x="16" y="16" width="59" height="21"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coins" translatesAutoresizingMaskIntoConstraints="NO" id="ZTd-ql-XIQ">
+                                <rect key="frame" x="300" y="8" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="LAN-Fd-zCi"/>
+                                    <constraint firstAttribute="width" constant="20" id="ht4-7B-qTy"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="500" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oez-Pt-1Pc">
+                                <rect key="frame" x="328" y="8" width="31" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.8980392157" green="0.73333333329999995" blue="0.035294117649999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rGg-z5-fdo">
-                                <rect key="frame" x="36" y="45" width="19" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="punten" translatesAutoresizingMaskIntoConstraints="NO" id="hFa-Yb-rPo">
+                                <rect key="frame" x="16" y="8" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="L1M-eB-zuh"/>
+                                    <constraint firstAttribute="height" constant="20" id="nv4-HO-hBy"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rh6-hs-BDp">
+                                <rect key="frame" x="44" y="8" width="10.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.8980392157" green="0.73333333329999995" blue="0.035294117649999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.058391353629999997" green="0.054083341290000003" blue="0.05434820605" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="Rh6-hs-BDp" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="1I0-LX-Eqn"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qNJ-bc-pPz" secondAttribute="bottom" constant="20" id="1ce-aA-HDc"/>
                             <constraint firstItem="qNJ-bc-pPz" firstAttribute="leading" secondItem="qr7-U9-IFk" secondAttribute="trailing" constant="30" id="EHd-dX-VyO"/>
                             <constraint firstItem="8Vz-Gj-uei" firstAttribute="top" secondItem="pcK-sv-LiS" secondAttribute="bottom" constant="30" id="GNC-m8-lZx"/>
-                            <constraint firstItem="nor-7L-bvO" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="J83-7t-AUM"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="oez-Pt-1Pc" secondAttribute="trailing" constant="16" id="Jy3-76-C5S"/>
+                            <constraint firstItem="ZTd-ql-XIQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="Kqx-NF-pHW"/>
+                            <constraint firstItem="oez-Pt-1Pc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="LTw-6C-77e"/>
                             <constraint firstItem="qNJ-bc-pPz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="TYu-sX-ncB"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qr7-U9-IFk" secondAttribute="bottom" constant="20" id="al2-dk-2fj"/>
+                            <constraint firstItem="hFa-Yb-rPo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="b85-cG-0yf"/>
                             <constraint firstItem="pcK-sv-LiS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bdD-qz-wnM"/>
                             <constraint firstItem="8Vz-Gj-uei" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-40" id="cuv-dh-Ghy"/>
+                            <constraint firstItem="oez-Pt-1Pc" firstAttribute="leading" secondItem="ZTd-ql-XIQ" secondAttribute="trailing" constant="8" id="eyM-Up-hHn"/>
                             <constraint firstItem="P7j-Kv-xRL" firstAttribute="top" secondItem="pcK-sv-LiS" secondAttribute="bottom" constant="180" id="fAF-Sb-tHr"/>
-                            <constraint firstItem="rGg-z5-fdo" firstAttribute="top" secondItem="nor-7L-bvO" secondAttribute="bottom" constant="8" id="lGT-mH-aun"/>
+                            <constraint firstItem="hFa-Yb-rPo" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="idP-n1-NZ0"/>
+                            <constraint firstItem="Rh6-hs-BDp" firstAttribute="leading" secondItem="hFa-Yb-rPo" secondAttribute="trailing" constant="8" id="lH6-rT-mFq"/>
                             <constraint firstItem="P7j-Kv-xRL" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="lax-Ji-MAz"/>
-                            <constraint firstItem="nor-7L-bvO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="qOo-Tp-XQP"/>
-                            <constraint firstItem="rGg-z5-fdo" firstAttribute="centerX" secondItem="nor-7L-bvO" secondAttribute="centerX" id="t6d-JF-2Id"/>
                             <constraint firstItem="pcK-sv-LiS" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="wob-Hm-mrR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Blackjack" largeTitleDisplayMode="never" id="N0a-Mb-NlG"/>
                     <connections>
-                        <outlet property="labelPuntenSpeler" destination="rGg-z5-fdo" id="3Bg-ND-ULt"/>
+                        <outlet property="labelPuntenSpeler" destination="Rh6-hs-BDp" id="zPy-e3-v1N"/>
                         <outlet property="stackView" destination="8Vz-Gj-uei" id="wJY-l3-KQ9"/>
                         <outlet property="topCustomButton" destination="qNJ-bc-pPz" id="jMg-7g-xfQ"/>
                     </connections>
@@ -146,7 +164,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DDO-4N-1PP">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="199.50000000000006"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
                                                     <fontDescription key="fontDescription" name="HoeflerText-Black" family="Hoefler Text" pointSize="35"/>
                                                     <state key="normal" title="Blackjack" backgroundImage="banner1">
                                                         <color key="titleColor" red="0.87080770730000001" green="0.7089357972" blue="0.42352041600000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -354,8 +372,10 @@
         <image name="banner1" width="626" height="253"/>
         <image name="banner2" width="626" height="417"/>
         <image name="banner5" width="1000" height="1000"/>
+        <image name="coins" width="212" height="189"/>
         <image name="home" width="24" height="24"/>
         <image name="menu" width="24" height="24"/>
+        <image name="punten" width="491" height="468"/>
     </resources>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
 </document>

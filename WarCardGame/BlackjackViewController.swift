@@ -47,7 +47,6 @@ class BlackjackViewController: UIViewController {
     
     @IBAction func dealTapped(_ sender: NieuweButton) {
         topCustomButton.shake()
-        
         self.fetchKaart{
             (drawCard) in
             guard let drawCard = drawCard else {return}
@@ -59,6 +58,9 @@ class BlackjackViewController: UIViewController {
                     self.topCustomButton.isEnabled = true
                 })
                 self.voegKaartToe(code: drawCard.cards[0].code)
+                if(Int(self.puntenVanSpeler())! >= 21){
+                    self.spelerIsKlaar()
+                }
                 //self.labelPuntenSpeler.text = self.puntenVanSpeler()
             }
         }
@@ -143,6 +145,11 @@ class BlackjackViewController: UIViewController {
             totaal += 10
         }
         return "\(totaal)"
+    }
+        
+    // Finished game
+    func spelerIsKlaar(){
+        self.topCustomButton.isHidden = true
     }
     
     func doubleUp() {}
