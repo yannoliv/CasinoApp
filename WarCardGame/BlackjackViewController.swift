@@ -10,8 +10,8 @@ import UIKit
 
 class BlackjackViewController: UIViewController {
     
-    @IBOutlet private var topCustomButton: NieuweButton!
-    var bottomCustomButton = NieuweButton()
+    @IBOutlet private var topCustomButton: HighlightButton!
+    var bottomCustomButton = HighlightButton()
     
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var labelPuntenSpeler: UILabel!
@@ -45,7 +45,7 @@ class BlackjackViewController: UIViewController {
         }
     }
     
-    @IBAction func dealTapped(_ sender: NieuweButton) {
+    @IBAction func dealTapped(_ sender: HighlightButton) {
         topCustomButton.shake()
         self.fetchKaart{
             (drawCard) in
@@ -79,6 +79,7 @@ class BlackjackViewController: UIViewController {
             self.stackView.center.x -= 20
         }, completion: nil)
         
+        self.labelPuntenSpeler.text = self.puntenVanSpeler()
         print(self.puntenVanSpeler())
     }
     
@@ -162,7 +163,7 @@ class BlackjackViewController: UIViewController {
     
 }
 
-
+/*
 struct Deck: Codable{
     var success:Bool = false
     var deckID: String = ""
@@ -219,3 +220,4 @@ struct Card:Codable{
         self.code = try valueContainer.decode(String.self, forKey: CodingKeys.code)
     }
 }
+ */

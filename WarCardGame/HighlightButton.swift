@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NieuweButton: UIButton {
+class HighlightButton: UIButton {
 
     override init(frame:CGRect){
         super.init(frame: frame)

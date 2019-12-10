@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E4168ADD235EF6620020EFEB /* NieuweButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4168ADC235EF6620020EFEB /* NieuweButton.swift */; };
+		E4168ADD235EF6620020EFEB /* HighlightButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4168ADC235EF6620020EFEB /* HighlightButton.swift */; };
 		E4168ADF235F097E0020EFEB /* BlackjackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4168ADE235F097E0020EFEB /* BlackjackViewController.swift */; };
 		E436C860237173CD00539050 /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E436C85F237173CD00539050 /* HomeTableViewController.swift */; };
 		E43771D0235F66080076A591 /* PokerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43771CF235F66080076A591 /* PokerViewController.swift */; };
@@ -16,6 +16,12 @@
 		E4943651234C74DC00B3B71C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E494364F234C74DC00B3B71C /* LaunchScreen.storyboard */; };
 		E494365C234C74DC00B3B71C /* WarCardGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E494365B234C74DC00B3B71C /* WarCardGameTests.swift */; };
 		E4943667234C74DC00B3B71C /* WarCardGameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4943666234C74DC00B3B71C /* WarCardGameUITests.swift */; };
+		E4A5DB90239F833C0025DD13 /* BlackjackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A5DB8F239F833C0025DD13 /* BlackjackButton.swift */; };
+		E4A5DB93239F8A480025DD13 /* BetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A5DB92239F8A480025DD13 /* BetViewController.swift */; };
+		E4A5DB95239F9E100025DD13 /* Gebruiker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A5DB94239F9E100025DD13 /* Gebruiker.swift */; };
+		E4A5DB97239F9F880025DD13 /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40F1680237ABB3600229C78 /* Deck.swift */; };
+		E4A5DB99239F9FD00025DD13 /* DrawCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A5DB98239F9FD00025DD13 /* DrawCard.swift */; };
+		E4A5DB9B239F9FF10025DD13 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A5DB9A239F9FF10025DD13 /* Card.swift */; };
 		E4C330F5236F22D5004CD201 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C330F4236F22D5004CD201 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
@@ -38,7 +44,7 @@
 
 /* Begin PBXFileReference section */
 		E40F1680237ABB3600229C78 /* Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
-		E4168ADC235EF6620020EFEB /* NieuweButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NieuweButton.swift; sourceTree = "<group>"; };
+		E4168ADC235EF6620020EFEB /* HighlightButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightButton.swift; sourceTree = "<group>"; };
 		E4168ADE235F097E0020EFEB /* BlackjackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackjackViewController.swift; sourceTree = "<group>"; };
 		E436C85F237173CD00539050 /* HomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
 		E43771CF235F66080076A591 /* PokerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerViewController.swift; sourceTree = "<group>"; };
@@ -53,6 +59,11 @@
 		E4943662234C74DC00B3B71C /* WarCardGameUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WarCardGameUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4943666234C74DC00B3B71C /* WarCardGameUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarCardGameUITests.swift; sourceTree = "<group>"; };
 		E4943668234C74DC00B3B71C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E4A5DB8F239F833C0025DD13 /* BlackjackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackjackButton.swift; sourceTree = "<group>"; };
+		E4A5DB92239F8A480025DD13 /* BetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetViewController.swift; sourceTree = "<group>"; };
+		E4A5DB94239F9E100025DD13 /* Gebruiker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gebruiker.swift; sourceTree = "<group>"; };
+		E4A5DB98239F9FD00025DD13 /* DrawCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawCard.swift; sourceTree = "<group>"; };
+		E4A5DB9A239F9FF10025DD13 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		E4C330F4236F22D5004CD201 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,14 +92,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E40F167F237ABB2300229C78 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				E40F1680237ABB3600229C78 /* Deck.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		E494363A234C74D900B3B71C = {
 			isa = PBXGroup;
 			children = (
@@ -112,13 +115,11 @@
 		E4943645234C74D900B3B71C /* WarCardGame */ = {
 			isa = PBXGroup;
 			children = (
-				E40F167F237ABB2300229C78 /* Models */,
+				E4A5DB96239F9F820025DD13 /* Models */,
+				E4A5DB91239F89FC0025DD13 /* ViewControllers */,
+				E4A5DB8E239F82CD0025DD13 /* Themes */,
 				E4C330F4236F22D5004CD201 /* AppDelegate.swift */,
 				E494364A234C74D900B3B71C /* Main.storyboard */,
-				E43771CF235F66080076A591 /* PokerViewController.swift */,
-				E4168ADE235F097E0020EFEB /* BlackjackViewController.swift */,
-				E436C85F237173CD00539050 /* HomeTableViewController.swift */,
-				E4168ADC235EF6620020EFEB /* NieuweButton.swift */,
 				E494364D234C74DC00B3B71C /* Assets.xcassets */,
 				E494364F234C74DC00B3B71C /* LaunchScreen.storyboard */,
 				E4943652234C74DC00B3B71C /* Info.plist */,
@@ -142,6 +143,37 @@
 				E4943668234C74DC00B3B71C /* Info.plist */,
 			);
 			path = WarCardGameUITests;
+			sourceTree = "<group>";
+		};
+		E4A5DB8E239F82CD0025DD13 /* Themes */ = {
+			isa = PBXGroup;
+			children = (
+				E4168ADC235EF6620020EFEB /* HighlightButton.swift */,
+				E4A5DB8F239F833C0025DD13 /* BlackjackButton.swift */,
+			);
+			name = Themes;
+			sourceTree = "<group>";
+		};
+		E4A5DB91239F89FC0025DD13 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E43771CF235F66080076A591 /* PokerViewController.swift */,
+				E4168ADE235F097E0020EFEB /* BlackjackViewController.swift */,
+				E436C85F237173CD00539050 /* HomeTableViewController.swift */,
+				E4A5DB92239F8A480025DD13 /* BetViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		E4A5DB96239F9F820025DD13 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E40F1680237ABB3600229C78 /* Deck.swift */,
+				E4A5DB94239F9E100025DD13 /* Gebruiker.swift */,
+				E4A5DB98239F9FD00025DD13 /* DrawCard.swift */,
+				E4A5DB9A239F9FF10025DD13 /* Card.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -275,11 +307,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4A5DB97239F9F880025DD13 /* Deck.swift in Sources */,
+				E4A5DB90239F833C0025DD13 /* BlackjackButton.swift in Sources */,
 				E436C860237173CD00539050 /* HomeTableViewController.swift in Sources */,
+				E4A5DB95239F9E100025DD13 /* Gebruiker.swift in Sources */,
 				E4C330F5236F22D5004CD201 /* AppDelegate.swift in Sources */,
-				E4168ADD235EF6620020EFEB /* NieuweButton.swift in Sources */,
+				E4168ADD235EF6620020EFEB /* HighlightButton.swift in Sources */,
 				E43771D0235F66080076A591 /* PokerViewController.swift in Sources */,
+				E4A5DB99239F9FD00025DD13 /* DrawCard.swift in Sources */,
+				E4A5DB93239F8A480025DD13 /* BetViewController.swift in Sources */,
 				E4168ADF235F097E0020EFEB /* BlackjackViewController.swift in Sources */,
+				E4A5DB9B239F9FF10025DD13 /* Card.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
