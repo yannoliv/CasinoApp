@@ -10,4 +10,8 @@ import Foundation
 
 struct Gebruiker{
     var currency: Int
+    
+    init(){
+        currency = 400
+    }
 }

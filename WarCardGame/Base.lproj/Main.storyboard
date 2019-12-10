@@ -115,6 +115,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Blackjack" largeTitleDisplayMode="never" id="N0a-Mb-NlG"/>
                     <connections>
+                        <outlet property="labelCurrencyGebruiker" destination="oez-Pt-1Pc" id="jhq-Pk-9Lw"/>
                         <outlet property="labelPuntenSpeler" destination="Rh6-hs-BDp" id="zPy-e3-v1N"/>
                         <outlet property="stackView" destination="8Vz-Gj-uei" id="wJY-l3-KQ9"/>
                         <outlet property="topCustomButton" destination="qNJ-bc-pPz" id="jMg-7g-xfQ"/>

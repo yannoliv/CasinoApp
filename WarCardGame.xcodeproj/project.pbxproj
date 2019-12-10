@@ -157,10 +157,10 @@
 		E4A5DB91239F89FC0025DD13 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				E43771CF235F66080076A591 /* PokerViewController.swift */,
 				E4168ADE235F097E0020EFEB /* BlackjackViewController.swift */,
-				E436C85F237173CD00539050 /* HomeTableViewController.swift */,
 				E4A5DB92239F8A480025DD13 /* BetViewController.swift */,
+				E43771CF235F66080076A591 /* PokerViewController.swift */,
+				E436C85F237173CD00539050 /* HomeTableViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";

@@ -14,8 +14,11 @@ class BlackjackViewController: UIViewController {
     var bottomCustomButton = HighlightButton()
     
     @IBOutlet weak var stackView: UIStackView!
-    @IBOutlet weak var labelPuntenSpeler: UILabel!
+    @IBOutlet weak var lblPuntenGebruiker: UILabel!
     
+    @IBOutlet weak var lblCurrencyGebruiker: UILabel!
+    // variabelen
+    public var gebruiker: Gebruiker = Gebruiker()
     var deckID: String=""
     var kaartenSpeler: [Card] = []
     
@@ -36,10 +39,7 @@ class BlackjackViewController: UIViewController {
                 self.fetchKaart{
                     (drawCard) in
                     guard let drawCard = drawCard else {return}
-                    DispatchQueue.main.async {
-                        self.voegKaartToe(code: drawCard.cards[0].code)
-                        //self.labelPuntenSpeler.text = self.puntenVanSpeler()
-                    }
+                    self.voegKaartToe(code: drawCard.cards[0].code)
                 }
             }
         }
@@ -58,7 +58,7 @@ class BlackjackViewController: UIViewController {
                     self.topCustomButton.isEnabled = true
                 })
                 self.voegKaartToe(code: drawCard.cards[0].code)
-                if(Int(self.puntenVanSpeler())! >= 21){
+                if(Int(self.puntenVanKaarten())! >= 21){
                     self.spelerIsKlaar()
                 }
                 //self.labelPuntenSpeler.text = self.puntenVanSpeler()
@@ -79,8 +79,7 @@ class BlackjackViewController: UIViewController {
             self.stackView.center.x -= 20
         }, completion: nil)
         
-        self.labelPuntenSpeler.text = self.puntenVanSpeler()
-        print(self.puntenVanSpeler())
+        refresh()
     }
     
     
@@ -126,7 +125,13 @@ class BlackjackViewController: UIViewController {
         task.resume()
     }
     
-    func puntenVanSpeler() -> String{
+    func refresh(){
+        DispatchQueue.main.async {
+            self.lblPuntenGebruiker.text = self.puntenVanKaarten()
+        }
+    }
+    
+    func puntenVanKaarten() -> String{
         var totaal: Int = 0
         var heeftAce: Bool = false
         
@@ -162,62 +167,3 @@ class BlackjackViewController: UIViewController {
     func surrender() {}
     
 }
-
-/*
-struct Deck: Codable{
-    var success:Bool = false
-    var deckID: String = ""
-    var shuffled: Bool = false
-    var remaining: Int = 0
-    
-    enum CodingKeys: String, CodingKey{
-        case success, deckID="deck_id", shuffled, remaining
-    }
-    
-    init(from decoder: Decoder) throws{
-        let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
-        self.success = try valueContainer.decode(Bool.self, forKey: CodingKeys.success)
-        self.deckID = try valueContainer.decode(String.self, forKey: CodingKeys.deckID)
-        self.shuffled = try valueContainer.decode(Bool.self, forKey: CodingKeys.shuffled)
-        self.remaining = try valueContainer.decode(Int.self, forKey: CodingKeys.remaining)
-    }
-}
-
-struct DrawCard: Codable{
-    var success:Bool = false
-    var cards: [Card] = []
-    var deckID: String = ""
-    var remaining: Int = 0
-    
-    enum CodingKeys: String, CodingKey{
-        case success, cards, deckID="deck_id", remaining
-    }
-    
-    init(from decoder: Decoder) throws{
-        let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
-        self.success = try valueContainer.decode(Bool.self, forKey: CodingKeys.success)
-        self.cards = try valueContainer.decode([Card].self, forKey: CodingKeys.cards)
-        self.deckID = try valueContainer.decode(String.self, forKey: CodingKeys.deckID)
-        self.remaining = try valueContainer.decode(Int.self, forKey: CodingKeys.remaining)
-    }
-}
-
-struct Card:Codable{
-    var image = URL(string:"")
-    var value: String = ""
-    var suit: String = ""
-    var code: String = ""
-    
-    enum CodingKeys: String, CodingKey{
-        case image, value, suit, code
-    }
-    
-    init(from decoder: Decoder) throws{
-        let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
-        self.image = try valueContainer.decode(URL.self, forKey: CodingKeys.image)
-        self.value = try valueContainer.decode(String.self, forKey: CodingKeys.value)
-        self.suit = try valueContainer.decode(String.self, forKey: CodingKeys.suit)
-        self.code = try valueContainer.decode(String.self, forKey: CodingKeys.code)
-    }
-}
- */
