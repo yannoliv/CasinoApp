@@ -21,8 +21,10 @@ class BetViewController: UIViewController {
     let valueBlackChip = 50
     let startInzet = 20
     
-    // Variabelen
+    // Nieuwe gebruiker aanmaken
     var gebruiker: Gebruiker = Gebruiker()
+    
+    // Standaard inzet
     var inzet : Int = 20
     
     override func viewDidLoad() {
@@ -33,6 +35,7 @@ class BetViewController: UIViewController {
     }
     
     @IBAction func clickedVerwijderInzet(_ sender: Any) {
+        // inzet komt terug op de standaard inzet, en de gebruiker krijgt zijn inzet terug.
         gebruiker.currency += inzet
         zetStartInzet()
         refresh()
@@ -81,6 +84,7 @@ class BetViewController: UIViewController {
     }
     
     func showPopup(){
+        // De gebruiker heeft geen geld meer over om in te zetten en klikt alsnog op een munt
         let alert = UIAlertController(title: "Opgelet", message: "Je hebt geen munten genoeg om in te zetten.", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Oke", style: .default, handler: nil))
@@ -88,16 +92,14 @@ class BetViewController: UIViewController {
         self.present(alert, animated: true)
     }
     
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        // Doorgaan naar de blackjack view controller.
+        // Gebruiker moet meegegeven worden.
         if segue.destination is BlackjackViewController
         {
             let vc = segue.destination as? BlackjackViewController
             vc?.gebruiker = self.gebruiker
+            vc?.inzet = self.inzet
         }
     }
     

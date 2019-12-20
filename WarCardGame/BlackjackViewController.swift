@@ -10,22 +10,33 @@ import UIKit
 
 class BlackjackViewController: UIViewController {
     
-    @IBOutlet private var topCustomButton: HighlightButton!
-    var bottomCustomButton = HighlightButton()
+    // Knoppen
+    @IBOutlet private var hitButton: HighlightButton!
+    @IBOutlet weak var doubleButton: BlackjackButton!
+    @IBOutlet weak var standButton: BlackjackButton!
     
+    // Kaarten
     @IBOutlet weak var stackView: UIStackView!
-    @IBOutlet weak var lblPuntenGebruiker: UILabel!
     
+    // Labels
+    @IBOutlet weak var lblPuntenGebruiker: UILabel!
     @IBOutlet weak var lblCurrencyGebruiker: UILabel!
-    // variabelen
+    
+    // Mee gekregen van BetViewController
     public var gebruiker: Gebruiker = Gebruiker()
-    var deckID: String=""
-    var kaartenSpeler: [Card] = []
+    public var inzet: Int = 0
+    
+    // Lokale variableen
+    private var deckID: String=""
+    private var kaartenSpeler: [Card] = []
     
     
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Alle labels correct zetten
+        refresh()
         
         // Deck aanmaken
         self.fetchDeck{
@@ -46,16 +57,17 @@ class BlackjackViewController: UIViewController {
     }
     
     @IBAction func dealTapped(_ sender: HighlightButton) {
-        topCustomButton.shake()
+        // Knop deal. Moet een kaart trekken vanuit de stapel.
+        hitButton.shake()
         self.fetchKaart{
             (drawCard) in
             guard let drawCard = drawCard else {return}
             
             DispatchQueue.main.async {
                 // button disablen na 1x klikken voor een second, spamprevention
-                self.topCustomButton.isEnabled = false
+                self.hitButton.isEnabled = false
                 Timer.scheduledTimer(withTimeInterval: 1.5, repeats: true, block: { timer in
-                    self.topCustomButton.isEnabled = true
+                    self.hitButton.isEnabled = true
                 })
                 self.voegKaartToe(code: drawCard.cards[0].code)
                 if(Int(self.puntenVanKaarten())! >= 21){
@@ -71,14 +83,19 @@ class BlackjackViewController: UIViewController {
         let nieuweKaart = UIImage(named:"kaarten/\(code)")
         guard nieuweKaart != nil else {return}
         
-        let kaartView = UIImageView(image: nieuweKaart!)
-        kaartView.frame = CGRect(x: -20 + self.kaartenSpeler.count*40, y: 0, width: 80, height: 123)
-        self.stackView.addSubview(kaartView)
-        
-        UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveLinear, animations: {
-            self.stackView.center.x -= 20
-        }, completion: nil)
-        
+        DispatchQueue.main.async {
+            // Kaart aanmaken
+            let kaartView = UIImageView(image: nieuweKaart!)
+            // Centreren van kaarten
+            kaartView.frame = CGRect(x: CGFloat(-40 + self.kaartenSpeler.count * 40 + Int(self.stackView.center.x)), y: 0, width: 80, height: 123)
+            
+            // Animeren van de toevoeging
+            UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveLinear, animations: {
+                // Kaart bij stackview steken
+                self.stackView.center.x -= 20
+                self.stackView.addSubview(kaartView)
+            }, completion: nil)
+        }
         refresh()
     }
     
@@ -115,7 +132,7 @@ class BlackjackViewController: UIViewController {
             if let data = data,
                 let drawCard = try? jsondecoder.decode(DrawCard.self, from:data){
                 self.kaartenSpeler.insert(drawCard.cards[0], at: 0)
-                print(drawCard.cards[0])
+                //print(drawCard.cards[0])
                 completion(drawCard)
             } else {
                 print("Either no data was returned, or data was not properly decoded.")
@@ -127,7 +144,10 @@ class BlackjackViewController: UIViewController {
     
     func refresh(){
         DispatchQueue.main.async {
+            // Alle labels correct zetten
             self.lblPuntenGebruiker.text = self.puntenVanKaarten()
+            let currencyString = String(self.inzet)
+            self.lblCurrencyGebruiker.text = currencyString
         }
     }
     
@@ -155,10 +175,19 @@ class BlackjackViewController: UIViewController {
         
     // Finished game
     func spelerIsKlaar(){
-        self.topCustomButton.isHidden = true
+        self.hitButton.isHidden = true
+        self.doubleButton.isHidden = true
+        self.standButton.isHidden = true
     }
     
-    func doubleUp() {}
+    @IBAction func doubleUp(_ sender: BlackjackButton) {
+        
+    }
+    
+    
+    @IBAction func stand(_ sender: BlackjackButton) {
+        
+    }
     
     func split() {}
     

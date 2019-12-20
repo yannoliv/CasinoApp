@@ -24,20 +24,20 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8Vz-Gj-uei" userLabel="JouwKaarten">
-                                <rect key="frame" x="30" y="100.5" width="315" height="123"/>
+                            <stackView clipsSubviews="YES" contentMode="center" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="8Vz-Gj-uei" userLabel="JouwKaarten">
+                                <rect key="frame" x="0.0" y="85.5" width="375" height="123"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="123" id="29r-EP-4dr"/>
                                 </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CPU kaarten" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P7j-Kv-xRL">
-                                <rect key="frame" x="139.5" y="250.5" width="96.5" height="20.5"/>
+                                <rect key="frame" x="139.5" y="223.5" width="96.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="zZu-FI-gWZ" userLabel="CPUKaarten">
-                                <rect key="frame" x="16" y="301" width="335" height="123"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="zZu-FI-gWZ" userLabel="CPUKaarten">
+                                <rect key="frame" x="0.0" y="259" width="375" height="123"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="123" id="Bjc-4S-Y16"/>
                                 </constraints>
@@ -62,68 +62,78 @@
                                     <constraint firstAttribute="height" constant="20" id="nv4-HO-hBy"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rh6-hs-BDp">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rh6-hs-BDp">
                                 <rect key="frame" x="44" y="8" width="10.5" height="20.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.8980392157" green="0.73333333329999995" blue="0.035294117649999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p2F-Qh-ahB" userLabel="Acties">
-                                <rect key="frame" x="127.5" y="494" width="120" height="30"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="p2F-Qh-ahB" userLabel="Acties">
+                                <rect key="frame" x="137.5" y="494" width="100" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Pm-Ba-Jnc" userLabel="DoubleButton" customClass="BlackjackButton" customModule="WarCardGame" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="49" height="30"/>
                                         <state key="normal" title="Double"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qNJ-bc-pPz" userLabel="HitButton" customClass="HighlightButton" customModule="WarCardGame" customModuleProvider="target">
-                                        <rect key="frame" x="49" y="0.0" width="30" height="30"/>
-                                        <state key="normal" title="Hit"/>
                                         <connections>
-                                            <action selector="dealTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JxV-la-gey"/>
+                                            <action selector="doubleUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Svb-o7-pJQ"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qr7-U9-IFk" userLabel="StandButton" customClass="BlackjackButton" customModule="WarCardGame" customModuleProvider="target">
-                                        <rect key="frame" x="79" y="0.0" width="41" height="30"/>
+                                        <rect key="frame" x="59" y="0.0" width="41" height="30"/>
                                         <state key="normal" title="Stand"/>
+                                        <connections>
+                                            <action selector="stand:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qVd-d7-6rn"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qNJ-bc-pPz" userLabel="HitButton" customClass="HighlightButton" customModule="WarCardGame" customModuleProvider="target">
+                                <rect key="frame" x="172.5" y="454" width="30" height="30"/>
+                                <state key="normal" title="Hit"/>
+                                <connections>
+                                    <action selector="dealTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JxV-la-gey"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.058391353629999997" green="0.054083341290000003" blue="0.05434820605" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Rh6-hs-BDp" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="1I0-LX-Eqn"/>
-                            <constraint firstItem="8Vz-Gj-uei" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="A3D-Je-P6Z"/>
-                            <constraint firstItem="8Vz-Gj-uei" firstAttribute="top" secondItem="pcK-sv-LiS" secondAttribute="bottom" constant="30" id="GNC-m8-lZx"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="oez-Pt-1Pc" secondAttribute="trailing" constant="16" id="Jy3-76-C5S"/>
-                            <constraint firstItem="ZTd-ql-XIQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="Kqx-NF-pHW"/>
-                            <constraint firstItem="oez-Pt-1Pc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="LTw-6C-77e"/>
-                            <constraint firstItem="p2F-Qh-ahB" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="R4l-CZ-PaH"/>
-                            <constraint firstItem="hFa-Yb-rPo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="b85-cG-0yf"/>
-                            <constraint firstItem="pcK-sv-LiS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bdD-qz-wnM"/>
-                            <constraint firstItem="zZu-FI-gWZ" firstAttribute="top" secondItem="P7j-Kv-xRL" secondAttribute="bottom" constant="30" id="cKX-pQ-ZN6"/>
-                            <constraint firstItem="oez-Pt-1Pc" firstAttribute="leading" secondItem="ZTd-ql-XIQ" secondAttribute="trailing" constant="8" id="eyM-Up-hHn"/>
-                            <constraint firstItem="P7j-Kv-xRL" firstAttribute="top" secondItem="pcK-sv-LiS" secondAttribute="bottom" constant="180" id="fAF-Sb-tHr"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="p2F-Qh-ahB" secondAttribute="bottom" constant="30" id="fWe-E6-Q0j"/>
-                            <constraint firstItem="hFa-Yb-rPo" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="idP-n1-NZ0"/>
-                            <constraint firstItem="Rh6-hs-BDp" firstAttribute="leading" secondItem="hFa-Yb-rPo" secondAttribute="trailing" constant="8" id="lH6-rT-mFq"/>
-                            <constraint firstItem="P7j-Kv-xRL" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="lax-Ji-MAz"/>
-                            <constraint firstItem="zZu-FI-gWZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="o1X-ke-sod"/>
-                            <constraint firstItem="pcK-sv-LiS" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="wob-Hm-mrR"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8Vz-Gj-uei" secondAttribute="trailing" constant="30" id="wzL-pu-1Ql"/>
+                            <constraint firstItem="hFa-Yb-rPo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="0cR-tb-Zon"/>
+                            <constraint firstItem="P7j-Kv-xRL" firstAttribute="top" secondItem="8Vz-Gj-uei" secondAttribute="bottom" constant="15" id="1p2-Da-y0e"/>
+                            <constraint firstItem="pcK-sv-LiS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3zj-Yh-ts5"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="oez-Pt-1Pc" secondAttribute="trailing" constant="16" id="4kk-1h-1iG"/>
+                            <constraint firstItem="8Vz-Gj-uei" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ADh-Lm-aSN"/>
+                            <constraint firstItem="oez-Pt-1Pc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="APv-3j-XQV"/>
+                            <constraint firstItem="zZu-FI-gWZ" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="Jar-qn-KmM"/>
+                            <constraint firstItem="p2F-Qh-ahB" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="O2T-V4-xOS"/>
+                            <constraint firstItem="P7j-Kv-xRL" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Rdb-1a-MTB"/>
+                            <constraint firstItem="oez-Pt-1Pc" firstAttribute="leading" secondItem="ZTd-ql-XIQ" secondAttribute="trailing" constant="8" id="Vg0-Hx-TU5"/>
+                            <constraint firstItem="pcK-sv-LiS" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="Vys-gj-xBi"/>
+                            <constraint firstItem="hFa-Yb-rPo" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="Xvb-BW-NlO"/>
+                            <constraint firstItem="p2F-Qh-ahB" firstAttribute="top" secondItem="qNJ-bc-pPz" secondAttribute="bottom" constant="10" id="YoB-M4-TSi"/>
+                            <constraint firstItem="zZu-FI-gWZ" firstAttribute="top" secondItem="P7j-Kv-xRL" secondAttribute="bottom" constant="15" id="dsE-TZ-hXd"/>
+                            <constraint firstItem="zZu-FI-gWZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ey0-Oh-q2p"/>
+                            <constraint firstItem="ZTd-ql-XIQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="jVg-tU-859"/>
+                            <constraint firstItem="8Vz-Gj-uei" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="kSS-h4-Q88"/>
+                            <constraint firstItem="8Vz-Gj-uei" firstAttribute="top" secondItem="pcK-sv-LiS" secondAttribute="bottom" constant="15" id="tJ1-NG-PRj"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="p2F-Qh-ahB" secondAttribute="bottom" constant="30" id="wmX-PO-0KL"/>
+                            <constraint firstItem="qNJ-bc-pPz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="y22-5s-cxH"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Blackjack" largeTitleDisplayMode="never" id="N0a-Mb-NlG"/>
                     <connections>
-                        <outlet property="labelCurrencyGebruiker" destination="oez-Pt-1Pc" id="jhq-Pk-9Lw"/>
-                        <outlet property="labelPuntenSpeler" destination="Rh6-hs-BDp" id="zPy-e3-v1N"/>
+                        <outlet property="doubleButton" destination="9Pm-Ba-Jnc" id="2Yo-df-mku"/>
+                        <outlet property="hitButton" destination="qNJ-bc-pPz" id="jMg-7g-xfQ"/>
+                        <outlet property="lblCurrencyGebruiker" destination="oez-Pt-1Pc" id="udH-5Y-Qrq"/>
+                        <outlet property="lblPuntenGebruiker" destination="Rh6-hs-BDp" id="6Y6-pG-8F5"/>
                         <outlet property="stackView" destination="8Vz-Gj-uei" id="wJY-l3-KQ9"/>
-                        <outlet property="topCustomButton" destination="qNJ-bc-pPz" id="jMg-7g-xfQ"/>
+                        <outlet property="standButton" destination="qr7-U9-IFk" id="ylf-zF-96S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5993" y="699"/>
+            <point key="canvasLocation" x="5992.8000000000002" y="698.5007496251875"/>
         </scene>
         <!--Blackjack-->
         <scene sceneID="zBF-Lx-HvV">
@@ -139,7 +149,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="C1c-ST-CmV"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="aCx-2l-Zeh"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="vyf-AH-hLX" userLabel="Bet Amount">

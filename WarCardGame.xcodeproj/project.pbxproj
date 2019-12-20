@@ -10,7 +10,6 @@
 		E4168ADD235EF6620020EFEB /* HighlightButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4168ADC235EF6620020EFEB /* HighlightButton.swift */; };
 		E4168ADF235F097E0020EFEB /* BlackjackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4168ADE235F097E0020EFEB /* BlackjackViewController.swift */; };
 		E436C860237173CD00539050 /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E436C85F237173CD00539050 /* HomeTableViewController.swift */; };
-		E43771D0235F66080076A591 /* PokerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43771CF235F66080076A591 /* PokerViewController.swift */; };
 		E494364C234C74D900B3B71C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E494364A234C74D900B3B71C /* Main.storyboard */; };
 		E494364E234C74DC00B3B71C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E494364D234C74DC00B3B71C /* Assets.xcassets */; };
 		E4943651234C74DC00B3B71C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E494364F234C74DC00B3B71C /* LaunchScreen.storyboard */; };
@@ -47,7 +46,6 @@
 		E4168ADC235EF6620020EFEB /* HighlightButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightButton.swift; sourceTree = "<group>"; };
 		E4168ADE235F097E0020EFEB /* BlackjackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackjackViewController.swift; sourceTree = "<group>"; };
 		E436C85F237173CD00539050 /* HomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
-		E43771CF235F66080076A591 /* PokerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerViewController.swift; sourceTree = "<group>"; };
 		E4943643234C74D900B3B71C /* WarCardGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WarCardGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E494364B234C74D900B3B71C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E494364D234C74DC00B3B71C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -159,7 +157,6 @@
 			children = (
 				E4168ADE235F097E0020EFEB /* BlackjackViewController.swift */,
 				E4A5DB92239F8A480025DD13 /* BetViewController.swift */,
-				E43771CF235F66080076A591 /* PokerViewController.swift */,
 				E436C85F237173CD00539050 /* HomeTableViewController.swift */,
 			);
 			name = ViewControllers;
@@ -313,7 +310,6 @@
 				E4A5DB95239F9E100025DD13 /* Gebruiker.swift in Sources */,
 				E4C330F5236F22D5004CD201 /* AppDelegate.swift in Sources */,
 				E4168ADD235EF6620020EFEB /* HighlightButton.swift in Sources */,
-				E43771D0235F66080076A591 /* PokerViewController.swift in Sources */,
 				E4A5DB99239F9FD00025DD13 /* DrawCard.swift in Sources */,
 				E4A5DB93239F8A480025DD13 /* BetViewController.swift in Sources */,
 				E4168ADF235F097E0020EFEB /* BlackjackViewController.swift in Sources */,
