@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Gebruiker{
+struct Gebruiker: Codable{
     var currency: Int
     
     init(){
