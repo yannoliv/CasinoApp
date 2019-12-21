@@ -37,34 +37,21 @@ class BlackjackViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Gebruiker opslaan vanaf hij op dit scherm komt
+        // Zo kan hij niet steeds opnieuw de view laden voor
+        // een beter hand te krijgen.
+        self.retrieveData()
+        
+        // Double up button moet weg indien geen geld genoeg
+        if(self.gebruiker.currency - self.inzet < 0){
+            self.doubleButton.isHidden = true
+        }
+        
         // Alle labels correct zetten
         refresh()
         
         // Deck aanmaken
-        self.fetchDeck{
-            (deck) in
-            guard let deck = deck else {return}
-            print(deck)
-            self.deckID = deck.deckID
-            
-            // 2 kaarten trekken speler
-            for _ in 1...2{
-                self.fetchKaart{
-                    (drawCard) in
-                    guard let drawCard = drawCard else {return}
-                    self.voegKaartToe(card: drawCard.cards[0], aanSpeler: true)
-                }
-            }
-            
-            // 2 kaarten trekken cpu
-            for _ in 1...2{
-                self.fetchKaart{
-                    (drawCard) in
-                    guard let drawCard = drawCard else {return}
-                    self.voegKaartToe(card: drawCard.cards[0], aanSpeler: false)
-                }
-            }
-        }
+        initialiseerDeck()
     }
     
     @IBAction func dealTapped(_ sender: HighlightButton) {
@@ -89,7 +76,6 @@ class BlackjackViewController: UIViewController {
     
     // Eén kaart toevoegen in de stackview van de speler
     func voegKaartToe(card: Card, aanSpeler: Bool){
-        
         let nieuweKaart = UIImage(named:"kaarten/\(card.code)")
         guard nieuweKaart != nil else {return}
         
@@ -212,31 +198,53 @@ class BlackjackViewController: UIViewController {
         eindeSpel(isGewonnen: false)
     }
     
-    func spelerIsKlaar(){
+    func schakelSpelerInputUit(){
         // Knopjes uitschakelen
         self.hitButton.isHidden = true
         self.doubleButton.isHidden = true
         self.standButton.isHidden = true
-        
-        // CPU begint met spelen
-        speelCPU()
     }
     
     func speelCPU(){
-        // Trek kaarten tot de cpu gelijk of meer dan de speler heeft
+        print(Int(puntenVanKaarten(kaarten: self.kaartenSpeler))!)
+        print(Int(puntenVanKaarten(kaarten: self.kaartenCPU))!)
+        while Int(puntenVanKaarten(kaarten: self.kaartenCPU))! < Int(puntenVanKaarten(kaarten: self.kaartenSpeler))!{
+            // Trek kaarten tot de cpu gelijk of meer dan de speler heeft
+            // while puntenVanKaarten(kaarten: self.kaartenCPU) < puntenVanKaarten(kaarten: self.kaartenSpeler) {
+            print("in de while")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                print("in de dispatch")
+                self.fetchKaart{
+                    (drawCard) in
+                    print("in de fetchkaart")
+                    guard let drawCard = drawCard else {return}
+                    // Kaart toevoegen
+                    self.voegKaartToe(card: drawCard.cards[0], aanSpeler: false)
+                }
+            }
+        }
+        if(puntenVanKaarten(kaarten: self.kaartenCPU) < puntenVanKaarten(kaarten: self.kaartenSpeler)){
+            eindeSpel(isGewonnen: true)
+        } else{
+            eindeSpel(isGewonnen: false)
+        }
     }
     
     func eindeSpel(isGewonnen: Bool){
-        writeData()
-        retrieveData()
+        schakelSpelerInputUit()
+        
+        // Alert met als inhoud de gebruiker gewonnen of verloren is
+        // Optie om te navigeren naar home of om opnieuw te gokken.
         let gewonnenString: String = isGewonnen ? "gewonnen!" : "verloren."
         let bericht: String = "Het spel is voltooid, je bent \(gewonnenString) Je hebt \(self.inzet) muntjes \(gewonnenString)"
         let alert = UIAlertController(title: "Status", message: bericht, preferredStyle: .alert)
-        
-        alert.addAction(UIAlertAction(title: "Opnieuw", style: .default, handler: nil))
-        alert.addAction(UIAlertAction(title: "Home", style: .cancel, handler: nil))
-        
-        self.present(alert, animated: true)
+        alert.addAction(UIAlertAction(title: "Home", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Opnieuw", style: .cancel, handler: nil))
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.present(alert, animated: true)
+        }
+        if(isGewonnen) { self.gebruiker.currency += self.inzet }
+        writeData()
     }
     
     @IBAction func doubleUp(_ sender: BlackjackButton) {
@@ -249,17 +257,51 @@ class BlackjackViewController: UIViewController {
         }
         
         // Inzet verdubbelen
-        self.gebruiker.currency -= self.inzet * 2
+        self.gebruiker.currency -= self.inzet
         self.inzet *= 2
-        
         self.refresh()
         
-        self.spelerIsKlaar()
+        self.schakelSpelerInputUit()
+        self.speelCPU()
     }
     
     
     @IBAction func stand(_ sender: BlackjackButton) {
-        self.spelerIsKlaar()
+        self.schakelSpelerInputUit()
+        
+        // CPU begint met spelen
+        speelCPU()
+    }
+    
+    func opnieuwSpelen(){
+        // Alles opnieuw doen, met dezelfde inzet.
+    }
+    
+    func initialiseerDeck(){
+        self.fetchDeck{
+            (deck) in
+            guard let deck = deck else {return}
+            print(deck)
+            self.deckID = deck.deckID
+        
+            // 2 kaarten trekken speler
+            for _ in 1...2{
+                self.fetchKaart{
+                (drawCard) in
+                guard let drawCard = drawCard else {return}
+                self.voegKaartToe(card: drawCard.cards[0], aanSpeler: true)
+                }
+            }
+        
+                // 2 kaarten trekken cpu
+            for _ in 1...2{
+                self.fetchKaart{
+                (drawCard) in
+                guard let drawCard = drawCard else {return}
+                self.voegKaartToe(card: drawCard.cards[0], aanSpeler: false)
+                }
+            }
+        }
     }
     
     // score printen in document()
@@ -287,8 +329,12 @@ class BlackjackViewController: UIViewController {
         let propertyListDecoder = PropertyListDecoder()
         if let retrievedGebruiker = try? Data(contentsOf: archiveURL),
             let decodedGebruiker = try? propertyListDecoder.decode(Gebruiker.self, from: retrievedGebruiker){
-            print(decodedGebruiker)
+            self.gebruiker = decodedGebruiker
         }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool){
+        print("disappeared")
     }
     
 }

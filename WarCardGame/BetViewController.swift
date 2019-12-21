@@ -29,9 +29,12 @@ class BetViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Gebruiker inlezen, hoeveel inzet heeft hij nog, ..
+        self.retrieveData()
+        
+        // Initialiseer de view, zien dat de labels goed staan, ...
         zetStartInzet()
-        refresh()
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func clickedVerwijderInzet(_ sender: Any) {
@@ -98,8 +101,38 @@ class BetViewController: UIViewController {
         if segue.destination is BlackjackViewController
         {
             let vc = segue.destination as? BlackjackViewController
-            vc?.gebruiker = self.gebruiker
+            //vc?.gebruiker = self.gebruiker
+            self.writeData()
             vc?.inzet = self.inzet
+        }
+    }    
+    
+    // score printen in document()
+    func writeData(){
+        let documentsDirectory =
+            FileManager.default.urls(for: .documentDirectory,
+                                     in: .userDomainMask).first!
+        let archiveURL =
+            documentsDirectory.appendingPathComponent("gebruiker_historiek").appendingPathExtension("plist")
+        
+        let propertyListEncoder = PropertyListEncoder()
+        let encodedGebruiker = try? propertyListEncoder.encode(self.gebruiker)
+        
+        try? encodedGebruiker?.write(to: archiveURL, options: .noFileProtection)
+    }
+    
+    // Score terug krijgen van gebruiker
+    func retrieveData(){
+        let documentsDirectory =
+            FileManager.default.urls(for: .documentDirectory,
+                                     in: .userDomainMask).first!
+        let archiveURL =
+            documentsDirectory.appendingPathComponent("gebruiker_historiek").appendingPathExtension("plist")
+        
+        let propertyListDecoder = PropertyListDecoder()
+        if let retrievedGebruiker = try? Data(contentsOf: archiveURL),
+            let decodedGebruiker = try? propertyListDecoder.decode(Gebruiker.self, from: retrievedGebruiker){
+            self.gebruiker = decodedGebruiker
         }
     }
     

@@ -16,6 +16,7 @@ class HomeTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.retrieveData()
         self.tableView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     }
     
@@ -23,8 +24,24 @@ class HomeTableViewController: UITableViewController {
         // Gebruiker aanmaken en meegeven naar het inzetten
         if segue.destination is BetViewController
         {
-            let vc = segue.destination as? BetViewController
-            vc?.gebruiker = self.gebruiker
+            //let vc = segue.destination as? BetViewController
+            //vc?.gebruiker = self.gebruiker
+        }
+    }
+    
+    // Score terug krijgen van gebruiker
+    func retrieveData(){
+        let documentsDirectory =
+            FileManager.default.urls(for: .documentDirectory,
+                                     in: .userDomainMask).first!
+        let archiveURL =
+            documentsDirectory.appendingPathComponent("gebruiker_historiek").appendingPathExtension("plist")
+        
+        let propertyListDecoder = PropertyListDecoder()
+        if let retrievedGebruiker = try? Data(contentsOf: archiveURL),
+            let decodedGebruiker = try? propertyListDecoder.decode(Gebruiker.self, from: retrievedGebruiker){
+            print(decodedGebruiker)
+            self.gebruiker = decodedGebruiker
         }
     }
 }

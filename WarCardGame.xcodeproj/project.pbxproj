@@ -22,6 +22,7 @@
 		E4A5DB99239F9FD00025DD13 /* DrawCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A5DB98239F9FD00025DD13 /* DrawCard.swift */; };
 		E4A5DB9B239F9FF10025DD13 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A5DB9A239F9FF10025DD13 /* Card.swift */; };
 		E4C330F5236F22D5004CD201 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C330F4236F22D5004CD201 /* AppDelegate.swift */; };
+		E4D53D3E23AEABA3009AC459 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D53D3D23AEABA3009AC459 /* ShopViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		E4A5DB98239F9FD00025DD13 /* DrawCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawCard.swift; sourceTree = "<group>"; };
 		E4A5DB9A239F9FF10025DD13 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		E4C330F4236F22D5004CD201 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E4D53D3D23AEABA3009AC459 /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +160,7 @@
 				E4168ADE235F097E0020EFEB /* BlackjackViewController.swift */,
 				E4A5DB92239F8A480025DD13 /* BetViewController.swift */,
 				E436C85F237173CD00539050 /* HomeTableViewController.swift */,
+				E4D53D3D23AEABA3009AC459 /* ShopViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 			files = (
 				E4A5DB97239F9F880025DD13 /* Deck.swift in Sources */,
 				E4A5DB90239F833C0025DD13 /* BlackjackButton.swift in Sources */,
+				E4D53D3E23AEABA3009AC459 /* ShopViewController.swift in Sources */,
 				E436C860237173CD00539050 /* HomeTableViewController.swift in Sources */,
 				E4A5DB95239F9E100025DD13 /* Gebruiker.swift in Sources */,
 				E4C330F5236F22D5004CD201 /* AppDelegate.swift in Sources */,
