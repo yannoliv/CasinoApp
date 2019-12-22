@@ -24,6 +24,8 @@ class BlackjackViewController: UIViewController {
     @IBOutlet weak var lblCurrencyGebruiker: UILabel!
     @IBOutlet weak var lblInzetGebruiker: UILabel!
     
+    @IBOutlet weak var lblUitslag: UILabel!
+    
     // Mee gekregen van BetViewController
     public var gebruiker: Gebruiker = Gebruiker()
     public var inzet: Int = 0
@@ -39,8 +41,6 @@ class BlackjackViewController: UIViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("viewDidLoad blackjack")
-        
         // Meteen als de view laadt, de huidige currency schrijven naar bestand
         // Als de gebruiker dan slechte kaarten krijgt, en weg navigeert, is hij
         // toch zijn inzet kwijt.
@@ -51,14 +51,12 @@ class BlackjackViewController: UIViewController {
             self.doubleButton.isHidden = true
         }
         
-        //refresh()
-        // labels refreshen gebeurt in viewWillApear
-        
         // Deck aanmaken
         initialiseerDeck()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.lblUitslag.isHidden = true
         // Alle labels correct zetten
         refresh()
     }
@@ -98,30 +96,19 @@ class BlackjackViewController: UIViewController {
             let kaartView = UIImageView(image: nieuweKaart!)
             // Centreren van kaarten
             if(aanSpeler){
+                // SPELER zijn kaart
                 self.kaartenSpeler.append(card)
-                
                 kaartView.frame = CGRect(x: self.kaartenSpeler.count * 40, y: 0, width: 80, height: 123)
-
                 self.stackViewSpeler.addSubview(kaartView)
-                
-                //UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveLinear, animations: {
-                    // Kaart bij stackview steken
-                //self.stackViewSpeler.center.x -= 20
-                //}, completion: nil)
             } else{
+                // CPU zijn kaart
                 self.kaartenCPU.append(card)
                 kaartView.frame = CGRect(x: self.kaartenCPU.count * 40, y: 0, width: 80, height: 123)
-                
                 self.stackViewCPU.addSubview(kaartView)
-                
-                // Animeren van de toevoeging
-               // UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveLinear, animations: {
-                    // Kaart bij stackview steken
-                    //self.stackViewCPU.center.x -= 20
-                //}, completion: nil)
             }
             self.refresh()
         }
+        usleep(300000)
     }
     
     
@@ -174,6 +161,9 @@ class BlackjackViewController: UIViewController {
             self.lblInzetGebruiker.text = inzetString
             let currencyString = String(self.gebruiker.currency)
             self.lblCurrencyGebruiker.text = currencyString
+            if(self.kaartenSpeler.count > 2){
+                self.doubleButton.isHidden = true
+            }
         }
         
         // Controleren of de speler nog geen 21 heeft, of meer!
@@ -224,18 +214,16 @@ class BlackjackViewController: UIViewController {
     func speelCPU(){
         
         // Trek kaarten tot de cpu gelijk of meer dan de speler heeft
-        while Int(puntenVanKaarten(kaarten: self.kaartenCPU))! < Int(puntenVanKaarten(kaarten: self.kaartenSpeler))!{
+        while Int(puntenVanKaarten(kaarten: self.kaartenCPU))! < 17{
             
             self.dispatchGroupPlayCPU.enter()
             
+            // Eén kaart toevoegen
             self.fetchKaart{
                 (drawCard) in
                 guard let drawCard = drawCard else {return}
-                
-                // Kaart toevoegen
                 let card = drawCard.cards[0]
-                print(card)
-                //self.voegKaartToe(card: drawCard.cards[0], aanSpeler: false)
+                
                 let nieuweKaart = UIImage(named:"kaarten/\(card.code)")
                 guard nieuweKaart != nil else {return}
                 self.kaartenCPU.append(card)
@@ -246,6 +234,7 @@ class BlackjackViewController: UIViewController {
                     kaartView.frame = CGRect(x: self.kaartenCPU.count * 40, y: 0, width: 80, height: 123)
                     self.stackViewCPU.addSubview(kaartView)
                 }
+                usleep(300000)
                 self.dispatchGroupPlayCPU.leave()
                 
             }
@@ -267,13 +256,26 @@ class BlackjackViewController: UIViewController {
         if(isGewonnen) { self.gebruiker.currency += self.inzet * 2 }
         writeData()
         
+        // uitslag tonen
+        DispatchQueue.main.async {
+            let gewonnenString: String = isGewonnen ? "gewonnen!" : "verloren."
+            self.lblUitslag.text = "Het spel is voltooid, je bent \(gewonnenString) Je hebt \(self.inzet) muntjes \(gewonnenString)"
+            self.lblUitslag.isHidden = false
+        }
+        
+        //popAlert(isGewonnen: isGewonnen)
+    }
+    
+    func popAlert(isGewonnen: Bool){
+        //usleep(300000)
+        
         // Alert met als inhoud de gebruiker gewonnen of verloren is
         // Optie om te navigeren naar home of om opnieuw te gokken.
         let gewonnenString: String = isGewonnen ? "gewonnen!" : "verloren."
         let bericht: String = "Het spel is voltooid, je bent \(gewonnenString) Je hebt \(self.inzet) muntjes \(gewonnenString)"
         let alert = UIAlertController(title: "Status", message: bericht, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Home", style: .default, handler: { action in
-            //self.tabBarController?.selectedIndex = 1
+            self.tabBarController?.selectedIndex = 0
             //self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
             //self.navigationController?.popViewController(animated: true);
         }))
@@ -285,7 +287,6 @@ class BlackjackViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.present(alert, animated: true)
         }
-        
     }
     
     @IBAction func doubleUp(_ sender: BlackjackButton) {
@@ -312,10 +313,6 @@ class BlackjackViewController: UIViewController {
         
         // CPU begint met spelen
         speelCPU()
-    }
-    
-    func opnieuwSpelen(){
-        // Alles opnieuw doen, met dezelfde inzet.
     }
     
     func initialiseerDeck(){
@@ -360,3 +357,12 @@ class BlackjackViewController: UIViewController {
     }
     
 }
+
+
+/** NOTES **
+ // Animation
+ UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveLinear, animations: {
+    //Kaart bij stackview steken
+    self.stackViewSpeler.center.x -= 20
+ }, completion: nil)
+ */
