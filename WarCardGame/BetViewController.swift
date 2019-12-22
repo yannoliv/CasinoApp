@@ -30,11 +30,19 @@ class BetViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Gebruiker inlezen, hoeveel inzet heeft hij nog, ..
+        // data inladen van bestand
         self.retrieveData()
         
-        // Initialiseer de view, zien dat de labels goed staan, ...
         zetStartInzet()
+        
+        // view zijn labels instellen
+        self.refresh()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.retrieveData()
+        zetStartInzet()
+        self.refresh()
     }
     
     @IBAction func clickedVerwijderInzet(_ sender: Any) {
@@ -76,7 +84,6 @@ class BetViewController: UIViewController {
     func zetStartInzet(){
         gebruiker.currency -= startInzet
         inzet = startInzet
-        refresh()
     }
     
     func refresh(){
@@ -101,24 +108,9 @@ class BetViewController: UIViewController {
         if segue.destination is BlackjackViewController
         {
             let vc = segue.destination as? BlackjackViewController
-            //vc?.gebruiker = self.gebruiker
-            self.writeData()
+            vc?.gebruiker = self.gebruiker
             vc?.inzet = self.inzet
         }
-    }    
-    
-    // score printen in document()
-    func writeData(){
-        let documentsDirectory =
-            FileManager.default.urls(for: .documentDirectory,
-                                     in: .userDomainMask).first!
-        let archiveURL =
-            documentsDirectory.appendingPathComponent("gebruiker_historiek").appendingPathExtension("plist")
-        
-        let propertyListEncoder = PropertyListEncoder()
-        let encodedGebruiker = try? propertyListEncoder.encode(self.gebruiker)
-        
-        try? encodedGebruiker?.write(to: archiveURL, options: .noFileProtection)
     }
     
     // Score terug krijgen van gebruiker

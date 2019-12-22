@@ -36,11 +36,12 @@ class BlackjackViewController: UIViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("viewDidLoad blackjack")
         
-        // Gebruiker opslaan vanaf hij op dit scherm komt
-        // Zo kan hij niet steeds opnieuw de view laden voor
-        // een beter hand te krijgen.
-        self.retrieveData()
+        // Meteen als de view laadt, de huidige currency schrijven naar bestand
+        // Als de gebruiker dan slechte kaarten krijgt, en weg navigeert, is hij
+        // toch zijn inzet kwijt.
+        self.writeData()
         
         // Double up button moet weg indien geen geld genoeg
         if(self.gebruiker.currency - self.inzet < 0){
@@ -52,6 +53,16 @@ class BlackjackViewController: UIViewController {
         
         // Deck aanmaken
         initialiseerDeck()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print("viewWillAppear blackjack")
+        refresh()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        print("view will disappear")
+        self.writeData()
     }
     
     @IBAction func dealTapped(_ sender: HighlightButton) {
@@ -233,18 +244,31 @@ class BlackjackViewController: UIViewController {
     func eindeSpel(isGewonnen: Bool){
         schakelSpelerInputUit()
         
+        // De gebruiker zijn currency is al reeds vermindert met de inzet.
+        // Wat nu moet gebeuren is dat verlies ongedaan maken, PLUS
+        // de inzet erbij optellen. Wat resulteert in 2x inzet
+        if(isGewonnen) { self.gebruiker.currency += self.inzet * 2 }
+        writeData()
+        
         // Alert met als inhoud de gebruiker gewonnen of verloren is
         // Optie om te navigeren naar home of om opnieuw te gokken.
         let gewonnenString: String = isGewonnen ? "gewonnen!" : "verloren."
         let bericht: String = "Het spel is voltooid, je bent \(gewonnenString) Je hebt \(self.inzet) muntjes \(gewonnenString)"
         let alert = UIAlertController(title: "Status", message: bericht, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Home", style: .default, handler: nil))
-        alert.addAction(UIAlertAction(title: "Opnieuw", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Home", style: .default, handler: { action in
+            //self.tabBarController?.selectedIndex = 1
+            self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+            self.navigationController?.popViewController(animated: true);
+        }))
+        alert.addAction(UIAlertAction(title: "Opnieuw", style: .cancel, handler: { action in
+            print("opnieuw")
+            self.dismiss(animated: true, completion: {});
+            self.navigationController?.popViewController(animated: true);
+        }))
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.present(alert, animated: true)
         }
-        if(isGewonnen) { self.gebruiker.currency += self.inzet }
-        writeData()
+        
     }
     
     @IBAction func doubleUp(_ sender: BlackjackButton) {
@@ -316,25 +340,6 @@ class BlackjackViewController: UIViewController {
         let encodedGebruiker = try? propertyListEncoder.encode(self.gebruiker)
         
         try? encodedGebruiker?.write(to: archiveURL, options: .noFileProtection)
-    }
-    
-    // Score terug krijgen van gebruiker
-    func retrieveData(){
-        let documentsDirectory =
-            FileManager.default.urls(for: .documentDirectory,
-                                     in: .userDomainMask).first!
-        let archiveURL =
-            documentsDirectory.appendingPathComponent("gebruiker_historiek").appendingPathExtension("plist")
-        
-        let propertyListDecoder = PropertyListDecoder()
-        if let retrievedGebruiker = try? Data(contentsOf: archiveURL),
-            let decodedGebruiker = try? propertyListDecoder.decode(Gebruiker.self, from: retrievedGebruiker){
-            self.gebruiker = decodedGebruiker
-        }
-    }
-    
-    override func viewDidDisappear(_ animated: Bool){
-        print("disappeared")
     }
     
 }

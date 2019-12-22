@@ -8,6 +8,8 @@
 
 import UIKit
 
+// Gevolgd via een tutorial, maar ik begrijp alles.
+
 class BlackjackButton: UIButton {
     
     override init(frame:CGRect){
