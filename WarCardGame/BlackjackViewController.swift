@@ -33,6 +33,9 @@ class BlackjackViewController: UIViewController {
     private var kaartenSpeler: [Card] = []
     private var kaartenCPU: [Card] = []
     
+    // Met behulp van de dispatchgroup kunnen we wachten op een asynchrone methode
+    let dispatchGroupPlayCPU = DispatchGroup()
+    
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,20 +51,19 @@ class BlackjackViewController: UIViewController {
             self.doubleButton.isHidden = true
         }
         
-        // Alle labels correct zetten
-        refresh()
+        //refresh()
+        // labels refreshen gebeurt in viewWillApear
         
         // Deck aanmaken
         initialiseerDeck()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("viewWillAppear blackjack")
+        // Alle labels correct zetten
         refresh()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        print("view will disappear")
         self.writeData()
     }
     
@@ -87,6 +89,7 @@ class BlackjackViewController: UIViewController {
     
     // Eén kaart toevoegen in de stackview van de speler
     func voegKaartToe(card: Card, aanSpeler: Bool){
+        
         let nieuweKaart = UIImage(named:"kaarten/\(card.code)")
         guard nieuweKaart != nil else {return}
         
@@ -96,24 +99,26 @@ class BlackjackViewController: UIViewController {
             // Centreren van kaarten
             if(aanSpeler){
                 self.kaartenSpeler.append(card)
-                kaartView.frame = CGRect(x: CGFloat(-40 + self.kaartenSpeler.count * 40 + Int(self.stackViewSpeler.center.x)), y: 0, width: 80, height: 123)
                 
-                // Animeren van de toevoeging
-                UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveLinear, animations: {
+                kaartView.frame = CGRect(x: self.kaartenSpeler.count * 40, y: 0, width: 80, height: 123)
+
+                self.stackViewSpeler.addSubview(kaartView)
+                
+                //UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveLinear, animations: {
                     // Kaart bij stackview steken
-                    self.stackViewSpeler.center.x -= 20
-                    self.stackViewSpeler.addSubview(kaartView)
-                }, completion: nil)
+                //self.stackViewSpeler.center.x -= 20
+                //}, completion: nil)
             } else{
                 self.kaartenCPU.append(card)
-                kaartView.frame = CGRect(x: CGFloat(-40 + self.kaartenCPU.count * 40 + Int(self.stackViewCPU.center.x)), y: 0, width: 80, height: 123)
+                kaartView.frame = CGRect(x: self.kaartenCPU.count * 40, y: 0, width: 80, height: 123)
+                
+                self.stackViewCPU.addSubview(kaartView)
                 
                 // Animeren van de toevoeging
-                UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveLinear, animations: {
+               // UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveLinear, animations: {
                     // Kaart bij stackview steken
-                    self.stackViewCPU.center.x -= 20
-                    self.stackViewCPU.addSubview(kaartView)
-                }, completion: nil)
+                    //self.stackViewCPU.center.x -= 20
+                //}, completion: nil)
             }
             self.refresh()
         }
@@ -175,7 +180,7 @@ class BlackjackViewController: UIViewController {
         if(Int(self.puntenVanKaarten(kaarten: self.kaartenSpeler))! > 21){
             self.spelerIsKapot()
         } else if(Int(self.puntenVanKaarten(kaarten: self.kaartenSpeler))! == 21){
-            self.spelerIsGewonnen()
+            self.speelCPU()
         }
     }
     
@@ -217,24 +222,36 @@ class BlackjackViewController: UIViewController {
     }
     
     func speelCPU(){
-        print(Int(puntenVanKaarten(kaarten: self.kaartenSpeler))!)
-        print(Int(puntenVanKaarten(kaarten: self.kaartenCPU))!)
+        
+        // Trek kaarten tot de cpu gelijk of meer dan de speler heeft
         while Int(puntenVanKaarten(kaarten: self.kaartenCPU))! < Int(puntenVanKaarten(kaarten: self.kaartenSpeler))!{
-            // Trek kaarten tot de cpu gelijk of meer dan de speler heeft
-            // while puntenVanKaarten(kaarten: self.kaartenCPU) < puntenVanKaarten(kaarten: self.kaartenSpeler) {
-            print("in de while")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                print("in de dispatch")
-                self.fetchKaart{
-                    (drawCard) in
-                    print("in de fetchkaart")
-                    guard let drawCard = drawCard else {return}
-                    // Kaart toevoegen
-                    self.voegKaartToe(card: drawCard.cards[0], aanSpeler: false)
+            
+            self.dispatchGroupPlayCPU.enter()
+            
+            self.fetchKaart{
+                (drawCard) in
+                guard let drawCard = drawCard else {return}
+                
+                // Kaart toevoegen
+                let card = drawCard.cards[0]
+                print(card)
+                //self.voegKaartToe(card: drawCard.cards[0], aanSpeler: false)
+                let nieuweKaart = UIImage(named:"kaarten/\(card.code)")
+                guard nieuweKaart != nil else {return}
+                self.kaartenCPU.append(card)
+
+                DispatchQueue.main.async {
+                    let kaartView = UIImageView(image: nieuweKaart!)
+                    print(self.kaartenCPU.count)
+                    kaartView.frame = CGRect(x: self.kaartenCPU.count * 40, y: 0, width: 80, height: 123)
+                    self.stackViewCPU.addSubview(kaartView)
                 }
+                self.dispatchGroupPlayCPU.leave()
+                
             }
+            self.dispatchGroupPlayCPU.wait()
         }
-        if(puntenVanKaarten(kaarten: self.kaartenCPU) < puntenVanKaarten(kaarten: self.kaartenSpeler)){
+        if(Int(puntenVanKaarten(kaarten: self.kaartenCPU))! > 21){
             eindeSpel(isGewonnen: true)
         } else{
             eindeSpel(isGewonnen: false)
@@ -257,8 +274,8 @@ class BlackjackViewController: UIViewController {
         let alert = UIAlertController(title: "Status", message: bericht, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Home", style: .default, handler: { action in
             //self.tabBarController?.selectedIndex = 1
-            self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
-            self.navigationController?.popViewController(animated: true);
+            //self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+            //self.navigationController?.popViewController(animated: true);
         }))
         alert.addAction(UIAlertAction(title: "Opnieuw", style: .cancel, handler: { action in
             print("opnieuw")
