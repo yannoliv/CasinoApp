@@ -15,6 +15,11 @@ class BlackjackViewController: UIViewController {
     @IBOutlet weak var doubleButton: BlackjackButton!
     @IBOutlet weak var standButton: BlackjackButton!
     
+    @IBOutlet weak var homeButton: BlackjackButton!
+    @IBOutlet weak var opnieuwButton: HighlightButton!
+    @IBOutlet weak var koopExtraCoins: UIButton!
+    @IBOutlet weak var uitslagStackView: UIStackView!
+    
     // Kaarten
     @IBOutlet weak var stackViewSpeler: UIStackView!
     @IBOutlet weak var stackViewCPU: UIStackView!
@@ -56,7 +61,6 @@ class BlackjackViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.lblUitslag.isHidden = true
         // Alle labels correct zetten
         refresh()
     }
@@ -223,6 +227,7 @@ class BlackjackViewController: UIViewController {
                 (drawCard) in
                 guard let drawCard = drawCard else {return}
                 let card = drawCard.cards[0]
+                print(card)
                 
                 let nieuweKaart = UIImage(named:"kaarten/\(card.code)")
                 guard nieuweKaart != nil else {return}
@@ -240,10 +245,11 @@ class BlackjackViewController: UIViewController {
             }
             self.dispatchGroupPlayCPU.wait()
         }
-        if(Int(puntenVanKaarten(kaarten: self.kaartenCPU))! > 21){
-            eindeSpel(isGewonnen: true)
-        } else{
+        if(Int(puntenVanKaarten(kaarten: self.kaartenCPU))! > Int(puntenVanKaarten(kaarten: self.kaartenSpeler))!
+            && Int(puntenVanKaarten(kaarten: self.kaartenCPU))! <= 21){
             eindeSpel(isGewonnen: false)
+        } else{
+            eindeSpel(isGewonnen: true)
         }
     }
     
@@ -261,32 +267,10 @@ class BlackjackViewController: UIViewController {
             let gewonnenString: String = isGewonnen ? "gewonnen!" : "verloren."
             self.lblUitslag.text = "Het spel is voltooid, je bent \(gewonnenString) Je hebt \(self.inzet) muntjes \(gewonnenString)"
             self.lblUitslag.isHidden = false
+            self.uitslagStackView.isHidden = false
+            self.koopExtraCoins.isHidden = false
         }
         
-        //popAlert(isGewonnen: isGewonnen)
-    }
-    
-    func popAlert(isGewonnen: Bool){
-        //usleep(300000)
-        
-        // Alert met als inhoud de gebruiker gewonnen of verloren is
-        // Optie om te navigeren naar home of om opnieuw te gokken.
-        let gewonnenString: String = isGewonnen ? "gewonnen!" : "verloren."
-        let bericht: String = "Het spel is voltooid, je bent \(gewonnenString) Je hebt \(self.inzet) muntjes \(gewonnenString)"
-        let alert = UIAlertController(title: "Status", message: bericht, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Home", style: .default, handler: { action in
-            self.tabBarController?.selectedIndex = 0
-            //self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
-            //self.navigationController?.popViewController(animated: true);
-        }))
-        alert.addAction(UIAlertAction(title: "Opnieuw", style: .cancel, handler: { action in
-            print("opnieuw")
-            self.dismiss(animated: true, completion: {});
-            self.navigationController?.popViewController(animated: true);
-        }))
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.present(alert, animated: true)
-        }
     }
     
     @IBAction func doubleUp(_ sender: BlackjackButton) {
@@ -315,7 +299,22 @@ class BlackjackViewController: UIViewController {
         speelCPU()
     }
     
+    @IBAction func homeButton(_ sender: Any) {
+        print("home")
+        self.navigationController?.popViewController(animated: true);
+    }
+    
+    @IBAction func opnieuwButton(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true);
+    }
+    
+    @IBAction func koopExtra(_ sender: Any) {
+        
+    }
+    
+    
     func initialiseerDeck(){
+        
         self.fetchDeck{
             (deck) in
             guard let deck = deck else {return}
@@ -326,8 +325,8 @@ class BlackjackViewController: UIViewController {
             for _ in 1...2{
                 self.fetchKaart{
                 (drawCard) in
-                guard let drawCard = drawCard else {return}
-                self.voegKaartToe(card: drawCard.cards[0], aanSpeler: true)
+                    guard let drawCard = drawCard else {return}
+                    self.voegKaartToe(card: drawCard.cards[0], aanSpeler: true)
                 }
             }
         
@@ -335,8 +334,8 @@ class BlackjackViewController: UIViewController {
             for _ in 1...2{
                 self.fetchKaart{
                 (drawCard) in
-                guard let drawCard = drawCard else {return}
-                self.voegKaartToe(card: drawCard.cards[0], aanSpeler: false)
+                    guard let drawCard = drawCard else {return}
+                    self.voegKaartToe(card: drawCard.cards[0], aanSpeler: false)
                 }
             }
         }

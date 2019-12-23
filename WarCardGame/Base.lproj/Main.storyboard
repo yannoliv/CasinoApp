@@ -110,12 +110,40 @@
                                     <constraint firstAttribute="height" constant="20" id="lei-RJ-jyf"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Je hebt uitslag qdsffdq qsd sf qqfsd qsdf fqd qsd sqdfs" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TMj-Ws-FKy">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Je hebt uitslag qdsffdq qsd sf qqfsd qsdf fqd qsd sqdfs" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TMj-Ws-FKy">
                                 <rect key="frame" x="30" y="432" width="315" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="gO5-up-3x2" userLabel="Na uitslag knoppen">
+                                <rect key="frame" x="131.5" y="503" width="112" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WZr-AS-oZ4" customClass="BlackjackButton" customModule="WarCardGame" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="41" height="30"/>
+                                        <state key="normal" title="Home"/>
+                                        <connections>
+                                            <action selector="homeButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fLe-mE-LXr"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1p9-yz-Nu9" customClass="HighlightButton" customModule="WarCardGame" customModuleProvider="target">
+                                        <rect key="frame" x="51" y="0.0" width="61" height="30"/>
+                                        <state key="normal" title="Opnieuw"/>
+                                        <connections>
+                                            <action selector="opnieuwButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UIU-3f-sAj"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f78-m5-CAh">
+                                <rect key="frame" x="130" y="541" width="115" height="30"/>
+                                <state key="normal" title="Koop coins extra">
+                                    <color key="titleColor" red="1" green="0.78347975015640259" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="koopExtra:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TNJ-PO-jpt"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.058391353629999997" green="0.054083341290000003" blue="0.05434820605" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -130,9 +158,12 @@
                             <constraint firstItem="oez-Pt-1Pc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="APv-3j-XQV"/>
                             <constraint firstItem="Rh6-hs-BDp" firstAttribute="leading" secondItem="hFa-Yb-rPo" secondAttribute="trailing" constant="8" id="B2g-tI-QuR"/>
                             <constraint firstItem="ZTd-ql-XIQ" firstAttribute="leading" secondItem="UTM-CR-KSI" secondAttribute="trailing" constant="16" id="GZw-a4-ym1"/>
+                            <constraint firstItem="f78-m5-CAh" firstAttribute="top" secondItem="gO5-up-3x2" secondAttribute="bottom" constant="8" id="Idd-TZ-i06"/>
                             <constraint firstItem="Rh6-hs-BDp" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="IkP-lv-64v"/>
                             <constraint firstItem="zZu-FI-gWZ" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="Jar-qn-KmM"/>
+                            <constraint firstItem="gO5-up-3x2" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="KFB-oJ-aQK"/>
                             <constraint firstItem="p2F-Qh-ahB" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="O2T-V4-xOS"/>
+                            <constraint firstItem="f78-m5-CAh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="PC3-xJ-EVw"/>
                             <constraint firstItem="P7j-Kv-xRL" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Rdb-1a-MTB"/>
                             <constraint firstItem="oez-Pt-1Pc" firstAttribute="leading" secondItem="ZTd-ql-XIQ" secondAttribute="trailing" constant="8" id="Vg0-Hx-TU5"/>
                             <constraint firstItem="pcK-sv-LiS" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="Vys-gj-xBi"/>
@@ -141,6 +172,7 @@
                             <constraint firstItem="p2F-Qh-ahB" firstAttribute="top" secondItem="qNJ-bc-pPz" secondAttribute="bottom" constant="10" id="YoB-M4-TSi"/>
                             <constraint firstItem="TMj-Ws-FKy" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="30" id="avH-4c-iCC"/>
                             <constraint firstItem="zZu-FI-gWZ" firstAttribute="top" secondItem="P7j-Kv-xRL" secondAttribute="bottom" constant="15" id="dsE-TZ-hXd"/>
+                            <constraint firstItem="gO5-up-3x2" firstAttribute="top" secondItem="TMj-Ws-FKy" secondAttribute="bottom" constant="30" id="dt7-1T-P8S"/>
                             <constraint firstItem="zZu-FI-gWZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ey0-Oh-q2p"/>
                             <constraint firstItem="JIU-nQ-pZ0" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="fvC-dw-ErJ"/>
                             <constraint firstItem="ZTd-ql-XIQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="jVg-tU-859"/>
@@ -156,14 +188,18 @@
                     <connections>
                         <outlet property="doubleButton" destination="9Pm-Ba-Jnc" id="2Yo-df-mku"/>
                         <outlet property="hitButton" destination="qNJ-bc-pPz" id="jMg-7g-xfQ"/>
+                        <outlet property="homeButton" destination="WZr-AS-oZ4" id="DdJ-ey-A2L"/>
+                        <outlet property="koopExtraCoins" destination="f78-m5-CAh" id="Ldf-d0-GOk"/>
                         <outlet property="lblCurrencyGebruiker" destination="oez-Pt-1Pc" id="BDa-Cl-fhK"/>
                         <outlet property="lblInzetGebruiker" destination="UTM-CR-KSI" id="r1l-gV-6tG"/>
                         <outlet property="lblPuntenGebruiker" destination="Rh6-hs-BDp" id="6Y6-pG-8F5"/>
                         <outlet property="lblUitslag" destination="TMj-Ws-FKy" id="zwv-k1-56K"/>
                         <outlet property="navigationItem" destination="N0a-Mb-NlG" id="6N2-05-a9g"/>
+                        <outlet property="opnieuwButton" destination="1p9-yz-Nu9" id="yp7-LM-YTj"/>
                         <outlet property="stackViewCPU" destination="zZu-FI-gWZ" id="566-u9-3pa"/>
                         <outlet property="stackViewSpeler" destination="8Vz-Gj-uei" id="wJY-l3-KQ9"/>
                         <outlet property="standButton" destination="qr7-U9-IFk" id="ylf-zF-96S"/>
+                        <outlet property="uitslagStackView" destination="gO5-up-3x2" id="LdK-pI-dJg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
