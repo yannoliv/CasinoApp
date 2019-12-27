@@ -352,7 +352,28 @@
                     <view key="view" contentMode="scaleToFill" id="VWm-62-hh9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="inprogress" translatesAutoresizingMaskIntoConstraints="NO" id="MvT-hx-NoS">
+                                <rect key="frame" x="59.5" y="149" width="256" height="256"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="256" id="tze-al-gWC"/>
+                                    <constraint firstAttribute="width" constant="256" id="wSY-vS-FDG"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In progress" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rL0-gP-UJc">
+                                <rect key="frame" x="112.5" y="435" width="150.5" height="35"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="rL0-gP-UJc" firstAttribute="top" secondItem="MvT-hx-NoS" secondAttribute="bottom" constant="30" id="AQ1-Pd-vdE"/>
+                            <constraint firstItem="MvT-hx-NoS" firstAttribute="centerY" secondItem="VWm-62-hh9" secondAttribute="centerY" id="ESX-WH-93J"/>
+                            <constraint firstItem="rL0-gP-UJc" firstAttribute="centerX" secondItem="VWm-62-hh9" secondAttribute="centerX" id="vPa-lN-G1o"/>
+                            <constraint firstItem="MvT-hx-NoS" firstAttribute="centerX" secondItem="VWm-62-hh9" secondAttribute="centerX" id="x0I-4G-YwF"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="jug-iC-hoM"/>
                     </view>
                     <navigationItem key="navigationItem" title="Poker" largeTitleDisplayMode="never" id="lrb-Sk-mFe"/>
@@ -637,6 +658,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="separatorColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="sectionIndexColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <sections>
                             <tableViewSection id="ekb-U9-ZTX">
@@ -676,7 +698,7 @@
                                             <subviews>
                                                 <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ckq-rb-tYO">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
-                                                    <state key="normal" title="Poker" backgroundImage="banner2">
+                                                    <state key="normal" backgroundImage="banner2">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                     <connections>
@@ -701,7 +723,7 @@
                                             <subviews>
                                                 <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HRe-5Y-I8V">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
-                                                    <state key="normal" title="Poker" backgroundImage="banner5">
+                                                    <state key="normal" backgroundImage="banner5">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                 </button>
@@ -711,28 +733,6 @@
                                                 <constraint firstAttribute="trailing" secondItem="HRe-5Y-I8V" secondAttribute="trailing" id="Ddh-Lz-neU"/>
                                                 <constraint firstItem="HRe-5Y-I8V" firstAttribute="leading" secondItem="675-Yy-PBV" secondAttribute="leading" id="Wkb-EE-gmK"/>
                                                 <constraint firstItem="HRe-5Y-I8V" firstAttribute="top" secondItem="675-Yy-PBV" secondAttribute="top" id="iSs-TI-FHp"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="200" id="wwT-Lz-JnM" userLabel="Poker">
-                                        <rect key="frame" x="0.0" y="600" width="375" height="200"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wwT-Lz-JnM" id="Ukr-Db-PvH">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dg4-IJ-mae">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
-                                                    <state key="normal" title="Poker" backgroundImage="banner2">
-                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    </state>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="dg4-IJ-mae" secondAttribute="trailing" id="YZT-h1-SkR"/>
-                                                <constraint firstItem="dg4-IJ-mae" firstAttribute="top" secondItem="Ukr-Db-PvH" secondAttribute="top" id="ZRm-fV-T8m"/>
-                                                <constraint firstAttribute="bottom" secondItem="dg4-IJ-mae" secondAttribute="bottom" id="ja1-77-azo"/>
-                                                <constraint firstItem="dg4-IJ-mae" firstAttribute="leading" secondItem="Ukr-Db-PvH" secondAttribute="leading" id="yTG-HP-zXg"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -755,7 +755,7 @@
         <!--Account-->
         <scene sceneID="a49-iL-8Tb">
             <objects>
-                <viewController title="Account" id="U79-j0-6wW" sceneMemberID="viewController">
+                <viewController title="Account" id="U79-j0-6wW" customClass="HighscoreViewController" customModule="WarCardGame" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Nul-B0-GUE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="502"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -864,6 +864,7 @@
         <image name="chest3" width="354" height="227"/>
         <image name="coins" width="212" height="189"/>
         <image name="home" width="24" height="24"/>
+        <image name="inprogress" width="512" height="512"/>
         <image name="menu" width="24" height="24"/>
         <image name="profile" width="24" height="24"/>
         <image name="punten" width="491" height="468"/>

@@ -63,6 +63,9 @@ class BlackjackViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        // Als je opeens het spel afsluit, moet de score al geschreven worden,
+        // zo voorkom je dat als iemand slechte kaarten heeft, hij gewoon het spel
+        // afsluit en opnieuw de app opent.
         self.writeData()
     }
     
@@ -402,21 +405,31 @@ class BlackjackViewController: UIViewController {
     
     // score printen in document()
     func writeScore(){
+        
+        // Oude highscore lijst ophalen
+        var highscores: Array<Highscore> = []
+        
         let documentsDirectory =
             FileManager.default.urls(for: .documentDirectory,
                                      in: .userDomainMask).first!
         let archiveURL =
             documentsDirectory.appendingPathComponent("highscores").appendingPathExtension("plist")
         
+        let propertyListDecoder = PropertyListDecoder()
+        if let retrievedHighscores = try? Data(contentsOf: archiveURL),
+            let decodedHighscores = try? propertyListDecoder.decode(Array<Highscore>.self, from: retrievedHighscores){
+            highscores = decodedHighscores
+        }
+
+        // klaarmaken voor nieuwe score bij oude scores toe te voegen
         let propertyListEncoder = PropertyListEncoder()
         
         let highScore: Highscore = Highscore(tijdstip: Date.init(), scoreSpeler: Int(self.puntenVanKaarten(kaarten: self.kaartenSpeler))!, scoreCPU: Int(self.puntenVanKaarten(kaarten: self.kaartenCPU))!, inzet: self.inzet, gebruiker: self.gebruiker)
         
-        print(highScore)
-        
-        let encodedScore = try? propertyListEncoder.encode(highScore)
-        
-        
+        // nieuwe score toevoegen
+        highscores.append(highScore)
+        print(highscores)
+        let encodedScore = try? propertyListEncoder.encode(highscores)
         try? encodedScore?.write(to: archiveURL, options: .noFileProtection)
     }
     
