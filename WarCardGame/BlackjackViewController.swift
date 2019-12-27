@@ -35,14 +35,11 @@ class BlackjackViewController: UIViewController {
     public var gebruiker: Gebruiker = Gebruiker()
     public var inzet: Int = 0
     
-    // Lokale variableen
+    // Lokale variabelen
     private var deckID: String=""
     private var kaartenSpeler: [Card] = []
     private var kaartenCPU: [Card] = []
-    
-    // Met behulp van de dispatchgroup kunnen we wachten op een asynchrone methode
-    let dispatchGroupPlayCPU = DispatchGroup()
-    
+    private var onzichtbareKaart: Card? = nil
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,7 +89,12 @@ class BlackjackViewController: UIViewController {
     // Eén kaart toevoegen in de stackview van de speler
     func voegKaartToe(card: Card, aanSpeler: Bool){
         
-        let nieuweKaart = UIImage(named:"kaarten/\(card.code)")
+        var nieuweKaart = UIImage(named:"kaarten/\(card.code)")
+        if(self.kaartenCPU.count == 1 && aanSpeler == false){
+            // Tweede kaart moet onzichtbaar zijn van de cpu!
+            nieuweKaart = UIImage(named:"kaarten/card_back")
+        }
+        
         guard nieuweKaart != nil else {return}
         
         DispatchQueue.main.async {
@@ -105,9 +107,19 @@ class BlackjackViewController: UIViewController {
                 kaartView.frame = CGRect(x: self.kaartenSpeler.count * 40, y: 0, width: 80, height: 123)
                 self.stackViewSpeler.addSubview(kaartView)
             } else{
-                // CPU zijn kaart
-                self.kaartenCPU.append(card)
-                kaartView.frame = CGRect(x: self.kaartenCPU.count * 40, y: 0, width: 80, height: 123)
+                // CPU zijn kaarten werken anders, de eerste kaart moet zichtbaar zijn, en op positie
+                // 40 staan, zijn tweede kaart moet eerst onzichtbaar zijn en op positie 80 staan
+                // vanaf een derde kaart regelt de methode speelCPU() het, door die async problemen
+                if(self.kaartenCPU.count == 1){
+                    // kaart niet toevoegen in de view van de cpu. Dat gebeurt pas vanaf het aan de cpu
+                    // zijn beurt is, dat het zichtbaar wordt. We slaan de kaart op in een locale
+                    // variabele en voegen die later toe aan de stackview
+                    self.onzichtbareKaart = card
+                    kaartView.frame = CGRect(x: 80, y: 0, width: 80, height: 123)
+                } else{
+                    self.kaartenCPU.append(card)
+                    kaartView.frame = CGRect(x: self.kaartenCPU.count * 40, y: 0, width: 80, height: 123)
+                }
                 self.stackViewCPU.addSubview(kaartView)
             }
             self.refresh()
@@ -205,6 +217,7 @@ class BlackjackViewController: UIViewController {
     }
     
     func spelerIsKapot(){
+        self.toonVerborgenKaartCPU()
         eindeSpel(isGewonnen: false)
     }
     
@@ -216,11 +229,18 @@ class BlackjackViewController: UIViewController {
     }
     
     func speelCPU(){
+        // Met behulp van de dispatchgroup kunnen we wachten op een asynchrone methode
+        let dispatchGroupPlayCPU = DispatchGroup()
+        
+        // Toon kaart die verborgen is
+        self.toonVerborgenKaartCPU()
         
         // Trek kaarten tot de cpu gelijk of meer dan de speler heeft
         while Int(puntenVanKaarten(kaarten: self.kaartenCPU))! < 17{
             
-            self.dispatchGroupPlayCPU.enter()
+            dispatchGroupPlayCPU.enter()
+            
+            let oorspronkelijkeHoeveelheidKaartenCPU: Int = self.kaartenCPU.count
             
             // Eén kaart toevoegen
             self.fetchKaart{
@@ -239,17 +259,41 @@ class BlackjackViewController: UIViewController {
                     kaartView.frame = CGRect(x: self.kaartenCPU.count * 40, y: 0, width: 80, height: 123)
                     self.stackViewCPU.addSubview(kaartView)
                 }
-                usleep(300000)
-                self.dispatchGroupPlayCPU.leave()
-                
+                if((oorspronkelijkeHoeveelheidKaartenCPU + 1) == self.kaartenCPU.count){
+                    dispatchGroupPlayCPU.leave()
+                }
             }
-            self.dispatchGroupPlayCPU.wait()
+            dispatchGroupPlayCPU.wait()
+            usleep(300000)
         }
-        if(Int(puntenVanKaarten(kaarten: self.kaartenCPU))! > Int(puntenVanKaarten(kaarten: self.kaartenSpeler))!
+        if(Int(puntenVanKaarten(kaarten: self.kaartenCPU))! >= Int(puntenVanKaarten(kaarten: self.kaartenSpeler))!
             && Int(puntenVanKaarten(kaarten: self.kaartenCPU))! <= 21){
             eindeSpel(isGewonnen: false)
         } else{
             eindeSpel(isGewonnen: true)
+        }
+    }
+    
+    func toonVerborgenKaartCPU(){
+        guard self.onzichtbareKaart != nil else {return}
+        self.kaartenCPU.append(self.onzichtbareKaart!)
+        DispatchQueue.main.async {
+            
+            // Eerste kaart vernieuwen
+            let view = self.stackViewCPU.subviews[0]
+            view.isHidden = true
+            let nieuweKaart = UIImage(named:"kaarten/\(self.kaartenCPU[0].code)")
+            let kaartView = UIImageView(image: nieuweKaart!)
+            kaartView.frame = CGRect(x: 40, y: 0, width: 80, height: 123)
+            self.stackViewCPU.addSubview(kaartView)
+            
+            // Tweede kaart vernieuwen
+            let view2 = self.stackViewCPU.subviews[1]
+            view2.isHidden = true
+            let nieuweKaart2 = UIImage(named:"kaarten/\(self.kaartenCPU[1].code)")
+            let kaartView2 = UIImageView(image: nieuweKaart2!)
+            kaartView2.frame = CGRect(x: 80, y: 0, width: 80, height: 123)
+            self.stackViewCPU.addSubview(kaartView2)
         }
     }
     
@@ -259,7 +303,12 @@ class BlackjackViewController: UIViewController {
         // De gebruiker zijn currency is al reeds vermindert met de inzet.
         // Wat nu moet gebeuren is dat verlies ongedaan maken, PLUS
         // de inzet erbij optellen. Wat resulteert in 2x inzet
-        if(isGewonnen) { self.gebruiker.currency += self.inzet * 2 }
+        if(isGewonnen) {
+            self.gebruiker.currency += self.inzet * 2
+            
+            // uitslag opslaan
+            self.writeScore()
+        }
         writeData()
         
         // uitslag tonen
@@ -286,9 +335,13 @@ class BlackjackViewController: UIViewController {
         self.gebruiker.currency -= self.inzet
         self.inzet *= 2
         self.refresh()
-        
         self.schakelSpelerInputUit()
-        self.speelCPU()
+        if(Int(self.puntenVanKaarten(kaarten: self.kaartenSpeler))! > 21){
+            self.spelerIsKapot()
+            self.toonVerborgenKaartCPU()
+        } else {
+            self.speelCPU()
+        }
     }
     
     
@@ -301,11 +354,11 @@ class BlackjackViewController: UIViewController {
     
     @IBAction func homeButton(_ sender: Any) {
         print("home")
-        self.navigationController?.popViewController(animated: true);
+        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func opnieuwButton(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true);
+        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func koopExtra(_ sender: Any) {
@@ -322,26 +375,18 @@ class BlackjackViewController: UIViewController {
             self.deckID = deck.deckID
         
             // 2 kaarten trekken speler
-            for _ in 1...2{
+            for index in 1...4{
+                
                 self.fetchKaart{
                 (drawCard) in
                     guard let drawCard = drawCard else {return}
-                    self.voegKaartToe(card: drawCard.cards[0], aanSpeler: true)
-                }
-            }
-        
-                // 2 kaarten trekken cpu
-            for _ in 1...2{
-                self.fetchKaart{
-                (drawCard) in
-                    guard let drawCard = drawCard else {return}
-                    self.voegKaartToe(card: drawCard.cards[0], aanSpeler: false)
+                    self.voegKaartToe(card: drawCard.cards[0], aanSpeler: index<3)
                 }
             }
         }
     }
     
-    // score printen in document()
+    // gebruiker opslaan in document()
     func writeData(){
         let documentsDirectory =
             FileManager.default.urls(for: .documentDirectory,
@@ -353,6 +398,26 @@ class BlackjackViewController: UIViewController {
         let encodedGebruiker = try? propertyListEncoder.encode(self.gebruiker)
         
         try? encodedGebruiker?.write(to: archiveURL, options: .noFileProtection)
+    }
+    
+    // score printen in document()
+    func writeScore(){
+        let documentsDirectory =
+            FileManager.default.urls(for: .documentDirectory,
+                                     in: .userDomainMask).first!
+        let archiveURL =
+            documentsDirectory.appendingPathComponent("highscores").appendingPathExtension("plist")
+        
+        let propertyListEncoder = PropertyListEncoder()
+        
+        let highScore: Highscore = Highscore(tijdstip: Date.init(), scoreSpeler: Int(self.puntenVanKaarten(kaarten: self.kaartenSpeler))!, scoreCPU: Int(self.puntenVanKaarten(kaarten: self.kaartenCPU))!, inzet: self.inzet, gebruiker: self.gebruiker)
+        
+        print(highScore)
+        
+        let encodedScore = try? propertyListEncoder.encode(highScore)
+        
+        
+        try? encodedScore?.write(to: archiveURL, options: .noFileProtection)
     }
     
 }

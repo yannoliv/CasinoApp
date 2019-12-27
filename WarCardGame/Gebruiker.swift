@@ -9,9 +9,11 @@
 import Foundation
 
 struct Gebruiker: Codable{
+    let naam: String
     var currency: Int
     
     init(){
+        naam = "anoniem"
         currency = 400
     }
 }

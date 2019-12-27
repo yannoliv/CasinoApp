@@ -10,6 +10,7 @@
 		E4168ADD235EF6620020EFEB /* HighlightButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4168ADC235EF6620020EFEB /* HighlightButton.swift */; };
 		E4168ADF235F097E0020EFEB /* BlackjackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4168ADE235F097E0020EFEB /* BlackjackViewController.swift */; };
 		E436C860237173CD00539050 /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E436C85F237173CD00539050 /* HomeTableViewController.swift */; };
+		E44C253423B6701F0042F622 /* Highscore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44C253323B6701F0042F622 /* Highscore.swift */; };
 		E494364C234C74D900B3B71C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E494364A234C74D900B3B71C /* Main.storyboard */; };
 		E494364E234C74DC00B3B71C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E494364D234C74DC00B3B71C /* Assets.xcassets */; };
 		E4943651234C74DC00B3B71C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E494364F234C74DC00B3B71C /* LaunchScreen.storyboard */; };
@@ -47,6 +48,7 @@
 		E4168ADC235EF6620020EFEB /* HighlightButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightButton.swift; sourceTree = "<group>"; };
 		E4168ADE235F097E0020EFEB /* BlackjackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackjackViewController.swift; sourceTree = "<group>"; };
 		E436C85F237173CD00539050 /* HomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
+		E44C253323B6701F0042F622 /* Highscore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Highscore.swift; sourceTree = "<group>"; };
 		E4943643234C74D900B3B71C /* WarCardGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WarCardGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E494364B234C74D900B3B71C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E494364D234C74DC00B3B71C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				E4A5DB94239F9E100025DD13 /* Gebruiker.swift */,
 				E4A5DB98239F9FD00025DD13 /* DrawCard.swift */,
 				E4A5DB9A239F9FF10025DD13 /* Card.swift */,
+				E44C253323B6701F0042F622 /* Highscore.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 			files = (
 				E4A5DB97239F9F880025DD13 /* Deck.swift in Sources */,
 				E4A5DB90239F833C0025DD13 /* BlackjackButton.swift in Sources */,
+				E44C253423B6701F0042F622 /* Highscore.swift in Sources */,
 				E4D53D3E23AEABA3009AC459 /* ShopViewController.swift in Sources */,
 				E436C860237173CD00539050 /* HomeTableViewController.swift in Sources */,
 				E4A5DB95239F9E100025DD13 /* Gebruiker.swift in Sources */,
