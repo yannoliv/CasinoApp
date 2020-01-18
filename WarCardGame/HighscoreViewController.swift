@@ -17,12 +17,11 @@ class HighscoreViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let barHeight: CGFloat = UIApplication.shared.statusBarFrame.size.height
         let displayWidth: CGFloat = self.view.frame.width
         let displayHeight: CGFloat = self.view.frame.height
         
-        myTableView = UITableView(frame: CGRect(x: 0, y: barHeight, width: displayWidth, height: displayHeight - barHeight))
-        myTableView.register(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
+        myTableView = UITableView(frame: CGRect(x: 0, y: 0, width: displayWidth, height: displayHeight))
+        myTableView.register(HighscoreTableCell.self, forCellReuseIdentifier: "MyCell")
         myTableView.dataSource = self
         myTableView.delegate = self
         self.view.addSubview(myTableView)
@@ -32,7 +31,7 @@ class HighscoreViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewWillAppear(_ animated: Bool) {
         // Nog voordat de view laad, moeten de highscores al geinitialiseerd worden.
         self.retrieveHighscores()
-        print(self.highscores)
+        self.myTableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -45,10 +44,9 @@ class HighscoreViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath as IndexPath)
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM dd,yyyy"
-        cell.textLabel!.text = "\(dateFormatter.string(from: self.highscores[indexPath.row].tijdstip)): \(self.highscores[indexPath.row].gebruiker.naam) - \(self.highscores[indexPath.row].inzet)"
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath as IndexPath) as! HighscoreTableCell
+        let currentLastItem = highscores[indexPath.row]
+        cell.highscore = currentLastItem
         return cell
     }
     
@@ -64,7 +62,11 @@ class HighscoreViewController: UIViewController, UITableViewDelegate, UITableVie
         let propertyListDecoder = PropertyListDecoder()
         if let retrievedHighscores = try? Data(contentsOf: archiveURL),
             let decodedHighscores = try? propertyListDecoder.decode(Array<Highscore>.self, from: retrievedHighscores){
-            self.highscores = decodedHighscores
+            
+            // Sorteren op hoogste inzet.
+            self.highscores = decodedHighscores.sorted(by:{
+                return $0.inzet > $1.inzet
+            })
         }
     }
 

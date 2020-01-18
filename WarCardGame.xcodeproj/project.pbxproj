@@ -23,6 +23,8 @@
 		E4A5DB97239F9F880025DD13 /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40F1680237ABB3600229C78 /* Deck.swift */; };
 		E4A5DB99239F9FD00025DD13 /* DrawCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A5DB98239F9FD00025DD13 /* DrawCard.swift */; };
 		E4A5DB9B239F9FF10025DD13 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A5DB9A239F9FF10025DD13 /* Card.swift */; };
+		E4AC6C4123D3640800A6A953 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AC6C4023D3640800A6A953 /* Extension.swift */; };
+		E4AC6C4323D364BF00A6A953 /* HighscoreTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AC6C4223D364BF00A6A953 /* HighscoreTableCell.swift */; };
 		E4C330F5236F22D5004CD201 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C330F4236F22D5004CD201 /* AppDelegate.swift */; };
 		E4D53D3E23AEABA3009AC459 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D53D3D23AEABA3009AC459 /* ShopViewController.swift */; };
 /* End PBXBuildFile section */
@@ -67,6 +69,8 @@
 		E4A5DB94239F9E100025DD13 /* Gebruiker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gebruiker.swift; sourceTree = "<group>"; };
 		E4A5DB98239F9FD00025DD13 /* DrawCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawCard.swift; sourceTree = "<group>"; };
 		E4A5DB9A239F9FF10025DD13 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		E4AC6C4023D3640800A6A953 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		E4AC6C4223D364BF00A6A953 /* HighscoreTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighscoreTableCell.swift; sourceTree = "<group>"; };
 		E4C330F4236F22D5004CD201 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E4D53D3D23AEABA3009AC459 /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -119,6 +123,7 @@
 		E4943645234C74D900B3B71C /* WarCardGame */ = {
 			isa = PBXGroup;
 			children = (
+				E4AC6C3F23D363CC00A6A953 /* Extensions */,
 				E4A5DB96239F9F820025DD13 /* Models */,
 				E4A5DB91239F89FC0025DD13 /* ViewControllers */,
 				E4A5DB8E239F82CD0025DD13 /* Themes */,
@@ -154,6 +159,7 @@
 			children = (
 				E4168ADC235EF6620020EFEB /* HighlightButton.swift */,
 				E4A5DB8F239F833C0025DD13 /* BlackjackButton.swift */,
+				E4AC6C4223D364BF00A6A953 /* HighscoreTableCell.swift */,
 			);
 			name = Themes;
 			sourceTree = "<group>";
@@ -180,6 +186,14 @@
 				E44C253323B6701F0042F622 /* Highscore.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		E4AC6C3F23D363CC00A6A953 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E4AC6C4023D3640800A6A953 /* Extension.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -322,7 +336,9 @@
 				E44C253623B68D960042F622 /* HighscoreViewController.swift in Sources */,
 				E4C330F5236F22D5004CD201 /* AppDelegate.swift in Sources */,
 				E4168ADD235EF6620020EFEB /* HighlightButton.swift in Sources */,
+				E4AC6C4123D3640800A6A953 /* Extension.swift in Sources */,
 				E4A5DB99239F9FD00025DD13 /* DrawCard.swift in Sources */,
+				E4AC6C4323D364BF00A6A953 /* HighscoreTableCell.swift in Sources */,
 				E4A5DB93239F8A480025DD13 /* BetViewController.swift in Sources */,
 				E4168ADF235F097E0020EFEB /* BlackjackViewController.swift in Sources */,
 				E4A5DB9B239F9FF10025DD13 /* Card.swift in Sources */,
